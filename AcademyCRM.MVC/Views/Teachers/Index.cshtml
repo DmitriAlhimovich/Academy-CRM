@@ -15,7 +15,7 @@
     @foreach (var teacher in Model)
     {
         <tr>
-            <td><a asp-controller="Teachers" asp-action="Edit" asp-route-id="@teacher.Id">' @teacher.LastName @teacher.FirstName</a></td>
+            <td><a asp-controller="Teachers" asp-action="Edit" asp-route-id="@teacher.Id">@teacher.LastName @teacher.FirstName</a></td>
             <td><a href="@teacher.LinkToProfile" target="_blank">@teacher.LinkToProfile</a></td>
         </tr>
     }

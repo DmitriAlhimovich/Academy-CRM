@@ -1,0 +1,37 @@
+﻿@model IEnumerable<StudentRequestModel>
+@{
+    ViewData["Title"] = "Student Requests";
+
+}
+<div id="container">
+    <h1>Requests</h1>
+
+    <div class="row ">
+        <a class="btn btn-info" asp-controller="StudentRequests" asp-action="Edit">Add New</a>
+    </div>
+    <div class="row mt-2">
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Comments</th>
+            </tr>
+
+            @foreach (var request in Model.OrderBy(r => r.CourseTitle).ThenBy(r => r.StudentName))
+            {
+        <tr>
+            <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@request.CourseId">@request.CourseTitle</a></td>
+            <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@request.StudentId">@request.StudentName</a></td>
+            <td>@request.Comments</td>
+        </tr>
+            }
+
+            <tr>
+                <th>
+                    <div class="text-info">Total: @Model.Count()</div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
