@@ -16,6 +16,8 @@ namespace AcademyCRM.DAL.EF.Contexts
         public DbSet<Topic> Topics { get; set; } = default!;
         public DbSet<Course> Courses{ get; set; } = default!;
 
+        public DbSet<StudentRequest> StudentRequests { get; set; } = default!;
+
         public AcademyContext()
         {
             

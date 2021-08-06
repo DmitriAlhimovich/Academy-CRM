@@ -4,6 +4,7 @@ using AcademyCRM.DAL;
 using AcademyCRM.DAL.EF.Contexts;
 using AcademyCRM.DAL.EF.Repositories;
 using AcademyCRM.MVC.Mapper;
+using AcademyCRM.MVC.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 
 namespace AcademyCRM.MVC
 {
@@ -35,12 +35,14 @@ namespace AcademyCRM.MVC
             services.AddScoped<IRepository<Teacher>, TeachersRepository>();
             services.AddScoped<IRepository<Student>, StudentsRepository>();
             services.AddScoped<IRepository<StudentGroup>, StudentGroupsRepository>();
+            services.AddScoped<IRepository<StudentRequest>, StudentRequestsRepository>();
 
             services.AddScoped<IEntityService<Topic>, EntityService<Topic>>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentGroupService, StudentGroupService>();
+            services.AddScoped<IEntityService<StudentRequest>, EntityService<StudentRequest>>();
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
