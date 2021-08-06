@@ -1,0 +1,59 @@
+﻿@model StudentModel
+
+@{
+    ViewData["Title"] = "Student " + Model.LastName;
+
+}
+
+@using (Html.BeginForm("Edit", "Students", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div>
+        @Html.ValidationSummary()
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input class="form-control" type="text" asp-for="FirstName" />
+        <span class="alert-danger" asp-validation-for="FirstName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input class="form-control" type="text" asp-for="LastName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthDate"></label>
+        <input class="form-control" type="date" asp-for="BirthDate" />
+        @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" type="text" asp-for="Email" />
+        <span class="alert-danger" asp-validation-for="Email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="GroupId"></label>
+        <select class="form-control" asp-for="GroupId" required>
+            @if (ViewBag.Groups != null) foreach (var group in (List<StudentGroupModel>)ViewBag.Groups)
+                {
+                    if (group.Id == Model.GroupId)
+                    {
+                        <option value="@group.Id" selected>@group.Title</option>
+                    }
+                    else
+                    {
+                        <option value="@group.Id">@group.Title</option>
+                    }
+                }
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial.cshtml")
+}
