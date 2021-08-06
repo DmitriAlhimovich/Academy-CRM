@@ -1,5 +1,4 @@
-﻿using AcademyCRM.BLL.Models;
-using AcademyCRM.DAL.EF.Contexts;
+﻿using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,14 +17,14 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public BaseRepository(AcademyContext context)
         {
-            //_context = context;
+            _context = context;
             _entities = context.Set<TEntity>();
         }
 
 
         public void Create(TEntity item)
         {
-            _entities.Add(item);
+            _context.Entry(item).State = EntityState.Added;
             _context.SaveChanges();
         }
 
@@ -44,7 +43,7 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public TEntity Get(int id) => _entities.Find(id);
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _entities.ToList();
         }

@@ -1,0 +1,62 @@
+﻿@model StudentRequestModel
+
+@{
+    ViewData["Title"] = $"Student Request ({Model.StudentName}, {Model.CourseTitle})";
+
+}
+
+@using (Html.BeginForm("Edit", "StudentRequests", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div>
+        @Html.ValidationSummary()
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Created"></label>
+        <input class="form-control" type="date" asp-for="Created" readonly="readonly" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StudentId"></label>
+        <select class="form-control" asp-for="StudentId" required>
+            @if (ViewBag.Students != null) foreach (var student in (List<StudentModel>)ViewBag.Students)
+                {
+                    if (student.Id == Model.StudentId)
+                    {
+                        <option value="@student.Id" selected>@student.FullName</option>
+                    }
+                    else
+                    {
+                        <option value="@student.Id">@student.FullName</option>
+                    }
+                }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseId"></label>
+        <select class="form-control" asp-for="CourseId" required>
+            @if (ViewBag.Courses != null) foreach (var course in (List<CourseModel>)ViewBag.Courses)
+                {
+                    if (course.Id == Model.CourseId)
+                    {
+                        <option value="@course.Id" selected>@course.Title</option>
+                    }
+                    else
+                    {
+                        <option value="@course.Id">@course.Title</option>
+                    }
+                }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial.cshtml")
+}

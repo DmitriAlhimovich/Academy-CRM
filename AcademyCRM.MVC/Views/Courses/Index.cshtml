@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CourseModel>
+@{
+    ViewData["Title"] = "Courses";
+
+}
+<div id="container">
+    <h1>Courses</h1>
+
+    <div class="row ">
+        <a class="btn btn-info" asp-controller="Courses" asp-action="Edit">Add New</a>
+    </div>
+    <div class="row mt-2">
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+
+            @foreach (var course in Model.OrderBy(c => c.Title))
+            {
+                <tr>
+                    <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">@course.Title</a></td>
+                    <td>@course.Description</td>
+                </tr>
+            }
+
+            <tr>
+                <th>
+                    <div class="text-info">Total: @Model.Count()</div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
