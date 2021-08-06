@@ -19,7 +19,6 @@ namespace AcademyCRM.DAL.EF.Repositories
             _context = context;
         }
 
-
         public void Create(Student item)
         {
             _context.Students.Add(item);

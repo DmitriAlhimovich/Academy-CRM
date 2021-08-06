@@ -4,49 +4,22 @@ using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210806102446_EmailColumnUpdated")]
+    partial class EmailColumnUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Program")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TopicId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TopicId");
-
-                    b.ToTable("Courses");
-                });
 
             modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
                 {
@@ -205,56 +178,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Topic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Topics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = ".Net (ASP.NET, Unity)",
-                            Title = ".Net"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Full-stack, JS, Spring",
-                            Title = "Java"
-                        });
-                });
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>
-                {
-                    b.HasOne("AcademyCRM.BLL.Models.Topic", "Topic")
-                        .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Topic");
-                });
-
             modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
                 {
                     b.HasOne("AcademyCRM.BLL.Models.StudentGroup", "Group")
@@ -273,15 +196,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasForeignKey("TeacherId");
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Topic", b =>
-                {
-                    b.HasOne("AcademyCRM.BLL.Models.Topic", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
                 });
 #pragma warning restore 612, 618
         }

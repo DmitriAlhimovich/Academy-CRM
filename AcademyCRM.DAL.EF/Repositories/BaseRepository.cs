@@ -18,7 +18,7 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public BaseRepository(AcademyContext context)
         {
-            //_context = context;
+            _context = context;
             _entities = context.Set<TEntity>();
         }
 

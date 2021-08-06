@@ -3,10 +3,7 @@ using AcademyCRM.BLL.Models;
 
 namespace AcademyCRM.BLL.Services
 {
-    public interface ITeacherService
+    public interface ITeacherService : IEntityService<Teacher>
     {
-        IEnumerable<Teacher> GetAll();
-        Teacher GetById(int id);
-        void Update(Teacher teacher);
     }
 }
