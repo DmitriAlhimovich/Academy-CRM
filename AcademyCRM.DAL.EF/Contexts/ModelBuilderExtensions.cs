@@ -12,6 +12,20 @@ namespace AcademyCRM.DAL.EF.Contexts
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            var topic1 = new Topic()
+            {
+                Id = 1,
+                Title = ".Net",
+                Description = ".Net (ASP.NET, Unity)"
+            };
+            var topic2 = new Topic()
+            {
+                Id = 2,
+                Title = "Java",
+                Description = "Full-stack, JS, Spring"
+            };
+            modelBuilder.Entity<Topic>().HasData(topic1, topic2);
+
             var teacher1 = new Teacher()
             {
                 Id = 1,

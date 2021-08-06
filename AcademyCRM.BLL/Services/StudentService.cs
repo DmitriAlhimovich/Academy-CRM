@@ -6,26 +6,36 @@ namespace AcademyCRM.BLL.Services
 {
     public class StudentService : IStudentService
     {
-        private readonly IRepository<Student> _studentRepository;
+        private readonly IRepository<Student> _repository;
 
-        public StudentService(IRepository<Student> studentRepository)
+        public StudentService(IRepository<Student> repository)
         {
-            _studentRepository = studentRepository;
+            _repository = repository;
         }
 
         public IEnumerable<Student> GetAll()
         {
-            return _studentRepository.GetAll();
+            return _repository.GetAll();
         }
 
         public Student GetById(int id)
         {
-            return _studentRepository.Get(id);
+            return _repository.Get(id);
+        }
+
+        public void Create(Student student)
+        {
+            _repository.Create(student);
         }
 
         public void Update(Student student)
         {
-            _studentRepository.Update(student);
+            _repository.Update(student);
+        }
+
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

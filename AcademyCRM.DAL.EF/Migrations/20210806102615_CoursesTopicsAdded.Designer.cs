@@ -4,14 +4,16 @@ using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210806102615_CoursesTopicsAdded")]
+    partial class CoursesTopicsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,20 +230,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("Topics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = ".Net (ASP.NET, Unity)",
-                            Title = ".Net"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Full-stack, JS, Spring",
-                            Title = "Java"
-                        });
                 });
 
             modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>

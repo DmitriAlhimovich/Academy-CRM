@@ -30,10 +30,14 @@ namespace AcademyCRM.MVC
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDb;Trusted_Connection=True;"));
 
+            services.AddScoped<IRepository<Topic>, BaseRepository<Topic>>();
+            services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
             services.AddScoped<IRepository<Teacher>, TeachersRepository>();
             services.AddScoped<IRepository<Student>, StudentsRepository>();
             services.AddScoped<IRepository<StudentGroup>, StudentGroupsRepository>();
 
+            services.AddScoped<IEntityService<Topic>, EntityService<Topic>>();
+            services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentGroupService, StudentGroupService>();
@@ -75,7 +79,7 @@ namespace AcademyCRM.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Courses}/{action=Index}/{id?}");
             });
         }
     }

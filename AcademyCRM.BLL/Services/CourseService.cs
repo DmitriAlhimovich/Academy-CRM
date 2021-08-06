@@ -4,33 +4,34 @@ using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services
 {
-    public class TeacherService : ITeacherService
+    public class CourseService : ICourseService
     {
-        IRepository<Teacher> _repository;
+        private readonly IRepository<Course> _repository;
 
-        public TeacherService(IRepository<Teacher> repository)
+        public CourseService(IRepository<Course> repository)
         {
             _repository = repository;
         }
 
-        public IEnumerable<Teacher> GetAll()
+        public IEnumerable<Course> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public Teacher GetById(int id)
+        public Course GetById(int id)
         {
             return _repository.Get(id);
         }
 
-        public void Create(Teacher teacher)
+        public void Create(Course course)
         {
-            _repository.Create(teacher);
+            course.Topic = null;
+            _repository.Create(course);
         }
 
-        public void Update(Teacher teacher)
+        public void Update(Course course)
         {
-            _repository.Update(teacher);
+            _repository.Update(course);
         }
 
         public void Delete(int id)

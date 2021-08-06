@@ -3,7 +3,7 @@ using AcademyCRM.BLL.Models;
 
 namespace AcademyCRM.BLL.Services
 {
-    public interface IStudentService : IEntityService<Student>
+    public interface ITopicService : IEntityService<Topic>
     {
     }
 }
