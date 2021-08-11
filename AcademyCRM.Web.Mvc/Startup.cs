@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using AcademyCRM.BLL;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.DAL;
@@ -42,12 +44,8 @@ namespace AcademyCRM.Web.Mvc
             services.AddScoped<IRepository<StudentGroup>, StudentGroupsRepository>();
             services.AddScoped<IRepository<StudentRequest>, StudentRequestsRepository>();
 
-            services.AddScoped<IEntityService<Topic>, EntityService<Topic>>();
-            services.AddScoped<ICourseService, CourseService>();
-            services.AddScoped<ITeacherService, TeacherService>();
-            services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IStudentGroupService, StudentGroupService>();
-            services.AddScoped<IEntityService<StudentRequest>, EntityService<StudentRequest>>();
+            services.AddBusinessLogicServices();
+            services.AddScoped<ICourseService, FakeCourseService>();
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
@@ -90,6 +88,38 @@ namespace AcademyCRM.Web.Mvc
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+    }
+
+    public class FakeCourseService : ICourseService
+    {
+        public IEnumerable<Course> GetAll()
+        {
+            return new[] { new Course
+            {
+                Title = "FakeCourse",
+                Description = "Fake desc"
+            } };
+        }
+
+        public Course GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Create(Course entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(Course entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
