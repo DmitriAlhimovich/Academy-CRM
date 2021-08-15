@@ -1,4 +1,5 @@
 ﻿using AcademyCRM.BLL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AcademyCRM.DAL.EF.Contexts
 {
-    public class AcademyContext : DbContext
+    public class AcademyContext : IdentityDbContext
     {
         public DbSet<Student> Students { get; set; } = default!;
         public DbSet<StudentGroup> StudentGroups { get; set; } = default!;
@@ -18,14 +19,12 @@ namespace AcademyCRM.DAL.EF.Contexts
 
         public DbSet<StudentRequest> StudentRequests { get; set; } = default!;
 
-        public AcademyContext()
-        {
-            
-        }
+        
         public AcademyContext(DbContextOptions<AcademyContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
         }
 
