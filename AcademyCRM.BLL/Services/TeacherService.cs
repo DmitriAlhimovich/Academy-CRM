@@ -6,7 +6,7 @@ namespace AcademyCRM.BLL.Services
 {
     public class TeacherService : ITeacherService
     {
-        IRepository<Teacher> _repository;
+        private readonly IRepository<Teacher> _repository;
 
         public TeacherService(IRepository<Teacher> repository)
         {
