@@ -1,3 +1,4 @@
+using AcademyCRM.BLL;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.DAL;
@@ -8,6 +9,7 @@ using AcademyCRM.MVC.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,9 @@ namespace AcademyCRM.MVC
         {
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDb;Trusted_Connection=True;"));
+            
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AcademyContext>();
 
             services.AddScoped<IRepository<Topic>, BaseRepository<Topic>>();
             services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
@@ -37,12 +42,8 @@ namespace AcademyCRM.MVC
             services.AddScoped<IRepository<StudentGroup>, StudentGroupsRepository>();
             services.AddScoped<IRepository<StudentRequest>, StudentRequestsRepository>();
 
-            services.AddScoped<IEntityService<Topic>, EntityService<Topic>>();
-            services.AddScoped<ICourseService, CourseService>();
-            services.AddScoped<ITeacherService, TeacherService>();
-            services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IStudentGroupService, StudentGroupService>();
-            services.AddScoped<IEntityService<StudentRequest>, EntityService<StudentRequest>>();
+            services.AddBusinessLogicServices();
+            //services.AddScoped<ICourseService, FakeCourseService>();
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
@@ -75,6 +76,7 @@ namespace AcademyCRM.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -82,6 +84,7 @@ namespace AcademyCRM.MVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Courses}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
