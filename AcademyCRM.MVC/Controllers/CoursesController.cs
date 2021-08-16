@@ -3,10 +3,12 @@ using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
+    [Authorize(Roles = "admin, manager")]
     public class CoursesController : Controller
     {
         private readonly ICourseService _courseService;
@@ -20,6 +22,7 @@ namespace AcademyCRM.MVC.Controllers
             _courseService = courseService;
         }
 
+        [Authorize(Roles = "admin, manager, student")]
         public IActionResult Index()
         {
             var students = _courseService.GetAll();

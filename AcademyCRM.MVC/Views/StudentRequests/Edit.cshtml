@@ -54,8 +54,13 @@
 
     <div class="form-group">
         <button type="submit" class="btn btn-success">Save</button>
+
     </div>
 }
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial.cshtml")

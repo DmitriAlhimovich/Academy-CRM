@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using AcademyCRM.BLL;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
@@ -31,9 +33,16 @@ namespace AcademyCRM.MVC
         {
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDb;Trusted_Connection=True;"));
-            
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AcademyContext>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+                    {
+                        options.SignIn.RequireConfirmedAccount = true;
+
+                    }
+                )
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<AcademyContext>()
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IRepository<Topic>, BaseRepository<Topic>>();
             services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
@@ -59,7 +68,7 @@ namespace AcademyCRM.MVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +95,23 @@ namespace AcademyCRM.MVC
                     pattern: "{controller=Courses}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            var user = await userManager.FindByEmailAsync(Configuration["AdminUserEmail"]);
+
+            if (user != null)
+            {
+                await userManager.RemoveFromRoleAsync(user, "admin");
+                await userManager.AddToRoleAsync(user, "manager");
+            }
         }
     }
 }
+

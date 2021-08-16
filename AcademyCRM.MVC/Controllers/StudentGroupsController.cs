@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
-    [Authorize(Roles = "admin, methodist")]
+    [Authorize(Roles = "admin, manager")]
     public class StudentGroupsController : Controller
     {
         private readonly IStudentGroupService _groupService;

@@ -4,10 +4,12 @@ using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
+    [Authorize(Roles = "admin, manager")]
     public class StudentRequestsController : Controller
     {
         private readonly IEntityService<StudentRequest> _requestService;
@@ -51,6 +53,14 @@ namespace AcademyCRM.MVC.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public void Delete(int id)
+        {
+
+            _requestService.Delete(id);
         }
     }
 }
