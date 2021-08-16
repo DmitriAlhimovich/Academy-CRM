@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutIndex";
+}
+
+<div class="accordion">
+
+    <h1 class="display-4">Academy CRM</h1>
+    <ul>
+        <li>
+            <h1><a class="nav-link text-dark" asp-controller="Students" asp-action="Index">Students</a></h1>
+        </li>
+        <li>
+            <h1><a class="nav-link text-dark" asp-controller="Teachers" asp-action="Index">Teachers</a></h1>
+        </li>
+        <li>
+            <h1><a class="nav-link text-dark" asp-controller="StudentGroups" asp-action="Index">Groups</a></h1>
+        </li>
+    </ul>
+</div>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace AcademyCRM.DAL.EF.Contexts
 {
@@ -19,7 +20,6 @@ namespace AcademyCRM.DAL.EF.Contexts
 
         public DbSet<StudentRequest> StudentRequests { get; set; } = default!;
 
-        
         public AcademyContext(DbContextOptions<AcademyContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
