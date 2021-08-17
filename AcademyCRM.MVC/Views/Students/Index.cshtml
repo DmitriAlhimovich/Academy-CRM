@@ -19,7 +19,12 @@
         {
             <tr>
                 <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">@student.FullName</a></td>
-                <td><a asp-controller="StudentGroups" asp-action="Edit" asp-route-id="@student.GroupId">@student.Group.Title</a> (<i>@student.Group.Status</i>)</td>
+                <td>@if(student.Group != null)
+                    {
+                        <a asp-controller="StudentGroups" asp-action="Edit" asp-route-id="@student.GroupId">@student.Group.Title</a>
+                        @Html.Raw($"(<i>{student.Group.Status}</i>)")
+                    }
+                    </td>
             </tr>
         }
 

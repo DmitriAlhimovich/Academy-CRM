@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AcademyCRM.BLL.Models
@@ -10,12 +11,16 @@ namespace AcademyCRM.BLL.Models
         [Required]
         public string Title { get; set; }
 
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
+
         public int? TeacherId { get; set; }
         public Teacher? Teacher { get; set; }
 
         public DateTime? StartDate { get; set; }
 
         public GroupStatus Status { get; set; }
+        public IEnumerable<Student> Students { get; set; }
     }
 
     public enum GroupStatus

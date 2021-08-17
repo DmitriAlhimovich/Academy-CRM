@@ -37,7 +37,7 @@ namespace AcademyCRM.DAL.EF.Repositories
             return _context.StudentGroups.Where(predicate).ToList();
         }
 
-        public StudentGroup Get(int id) => _context.StudentGroups.Find(id);
+        public StudentGroup Get(int id) => _context.StudentGroups.Include(g => g.Students).First(g => g.Id == id);
 
         public IEnumerable<StudentGroup> GetAll()
         {

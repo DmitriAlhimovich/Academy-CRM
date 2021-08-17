@@ -3,11 +3,11 @@ using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services
 {
-    public class EntityService<TEntity> : IEntityService<TEntity> where TEntity : class
+    public class BaseEntityService<TEntity> : IEntityService<TEntity> where TEntity : class
     {
         private readonly IRepository<TEntity> _repository;
 
-        public EntityService(IRepository<TEntity> repository)
+        public BaseEntityService(IRepository<TEntity> repository)
         {
             _repository = repository;
         }

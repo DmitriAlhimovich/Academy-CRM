@@ -34,7 +34,7 @@ namespace AcademyCRM.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AcademyContext>(options =>
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDb;Trusted_Connection=True;"));
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDB;Trusted_Connection=True;"));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddDefaultUI()
@@ -119,14 +119,14 @@ namespace AcademyCRM.MVC
 
             if (adminUser != null)
             {
-                await userManager.AddToRoleAsync(adminUser, "admin");
+                await userManager.AddToRoleAsync(adminUser, "ADMIN");
             }
 
             var managerUser = await userManager.FindByEmailAsync(Configuration["Security:ManagerUserEmail"]);
 
             if (managerUser != null)
             {
-                await userManager.AddToRoleAsync(managerUser, "manager");
+                await userManager.AddToRoleAsync(managerUser, "MANAGER");
             }
 
 

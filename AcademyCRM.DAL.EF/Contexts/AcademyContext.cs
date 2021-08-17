@@ -1,12 +1,6 @@
 ﻿using AcademyCRM.BLL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace AcademyCRM.DAL.EF.Contexts
 {
@@ -16,7 +10,7 @@ namespace AcademyCRM.DAL.EF.Contexts
         public DbSet<StudentGroup> StudentGroups { get; set; } = default!;
         public DbSet<Teacher> Teachers { get; set; } = default!;
         public DbSet<Topic> Topics { get; set; } = default!;
-        public DbSet<Course> Courses{ get; set; } = default!;
+        public DbSet<Course> Courses { get; set; } = default!;
 
         public DbSet<StudentRequest> StudentRequests { get; set; } = default!;
 
@@ -26,11 +20,6 @@ namespace AcademyCRM.DAL.EF.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDb;Trusted_Connection=True;");
         }
     }
 }

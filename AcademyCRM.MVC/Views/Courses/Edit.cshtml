@@ -48,7 +48,36 @@
     </div>
 
     <div class="form-group">
+        <label asp-for="Requests"></label>
+        <table class="table table-bordered table-sm">
+            <tr>
+                <th>Student</th>
+                <th>Comments</th>
+            </tr>
+
+            @foreach (var request in Model.Requests)
+            {
+                <tr>
+                    <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@request.StudentId">@request.StudentName</a></td>
+                    <td>@request.Comments</td>
+                </tr>
+            }
+
+            <tr>
+                <th>
+                    <div class="text-info">Total: @Model.Requests.Count()</div>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="form-group">
         <button type="submit" class="btn btn-success">Save</button>
+        @if (Model.Requests.Any())
+        {
+            <a class="btn btn-success" asp-controller="StudentGroups" asp-action="Edit" asp-route-courseId="@Model.Id">Create New Group</a>
+        }
     </div>
 }
 

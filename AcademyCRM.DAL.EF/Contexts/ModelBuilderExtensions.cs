@@ -84,13 +84,15 @@ namespace AcademyCRM.DAL.EF.Contexts
             {
                 Id = 1,
                 Title = "ASPNET_21_1",
-                TeacherId = teacher1.Id
+                TeacherId = teacher1.Id,
+                CourseId = course1.Id
             };
             var group2 = new StudentGroup()
             {
                 Id = 2,
                 Title = "Java_23_4",
-                TeacherId = teacher1.Id
+                TeacherId = teacher1.Id,
+                CourseId = course2.Id
             };
             modelBuilder.Entity<StudentGroup>().HasData(group1, group2);
 
@@ -99,15 +101,25 @@ namespace AcademyCRM.DAL.EF.Contexts
                 {
                     Id = 1,
                     FirstName = "Oleg",
-                    LastName = "Fedorov",
-                    GroupId = group1.Id
+                    LastName = "Fedorov"
                 },
                 new Student()
                 {
                     Id = 2,
                     FirstName = "Andrey",
-                    LastName = "Antonov",
-                    GroupId = group1.Id
+                    LastName = "Antonov"
+                },
+                new Student()
+                {
+                    Id = 3,
+                    FirstName = "Ivan",
+                    LastName = "Petrov"
+                },
+                new Student()
+                {
+                    Id = 4,
+                    FirstName = "Sergey",
+                    LastName = "Ivashko"
                 }
             );
 

@@ -10,15 +10,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
-    [Authorize(Roles = "admin, manager, student")]
+    [Authorize]
     public class StudentRequestsController : Controller
     {
-        private readonly IEntityService<StudentRequest> _requestService;
+        private readonly IStudentRequestService _requestService;
         private readonly ICourseService _courseService;
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
 
-        public StudentRequestsController(IMapper mapper, IStudentService studentService, ICourseService courseService, IEntityService<StudentRequest> requestService)
+        public StudentRequestsController(IMapper mapper, IStudentService studentService, ICourseService courseService, IStudentRequestService requestService)
         {
             _mapper = mapper;
             _studentService = studentService;
@@ -26,16 +26,16 @@ namespace AcademyCRM.MVC.Controllers
             _requestService = requestService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool? includeClosed)
         {
-            var requests = _requestService.GetAll();
+            var requests = includeClosed == true ? _requestService.GetAll() : _requestService.GetAllOpen();
             return View(_mapper.Map<IEnumerable<StudentRequestModel>>(requests));
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var model = id.HasValue ? _mapper.Map<StudentRequestModel>(_requestService.GetById(id.Value)) : new StudentRequestModel(){Created = DateTime.Today};
+            var model = id.HasValue ? _mapper.Map<StudentRequestModel>(_requestService.GetById(id.Value)) : new StudentRequestModel() { Created = DateTime.Today };
             ViewBag.Courses = _mapper.Map<IEnumerable<CourseModel>>(_courseService.GetAll().OrderBy(c => c.Title));
             ViewBag.Students = _mapper.Map<IEnumerable<StudentModel>>(_studentService.GetAll().OrderBy(s => s.LastName));
             return View(model);
