@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademyCRM.DAL.EF.Contexts
@@ -11,7 +12,7 @@ namespace AcademyCRM.DAL.EF.Contexts
     public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
-        {
+        {            
             var topic1 = new Topic()
             {
                 Id = 1,

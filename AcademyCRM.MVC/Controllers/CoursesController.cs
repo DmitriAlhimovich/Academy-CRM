@@ -1,27 +1,44 @@
 ﻿using System.Collections.Generic;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
+using AcademyCRM.MVC.Configuration;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AcademyCRM.MVC.Controllers
 {
+    [Authorize(Roles = "admin, manager, student")]
     public class CoursesController : Controller
     {
         private readonly ICourseService _courseService;
         private readonly IEntityService<Topic> _topicService;
+        private readonly IConfiguration _configuration;
+        private readonly SecurityOptions _securityOptions;
         private readonly IMapper _mapper;
 
-        public CoursesController(ICourseService courseService, IMapper mapper, IEntityService<Topic> topicService)
+        public CoursesController(ICourseService courseService,
+            IMapper mapper, 
+            IEntityService<Topic> topicService, 
+            IConfiguration configuration,
+            IOptions<SecurityOptions> options
+            )
         {
             _mapper = mapper;
             _topicService = topicService;
+            _configuration = configuration;
+            _securityOptions = options.Value;
             _courseService = courseService;
+
         }
 
         public IActionResult Index()
         {
+            var email = _securityOptions.AdminUserEmail;
+            var email2 = _configuration["Security:ManagerUserEmail"];
             var students = _courseService.GetAll();
             return View(_mapper.Map<IEnumerable<CourseModel>>(students));
         }
