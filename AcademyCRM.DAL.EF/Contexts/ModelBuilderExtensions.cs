@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademyCRM.DAL.EF.Contexts
@@ -12,7 +11,7 @@ namespace AcademyCRM.DAL.EF.Contexts
     public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
-        {            
+        {
             var topic1 = new Topic()
             {
                 Id = 1,
@@ -26,6 +25,44 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Description = "Full-stack, JS, Spring"
             };
             modelBuilder.Entity<Topic>().HasData(topic1, topic2);
+
+            var course1 = new Course()
+            {
+                Id = 10, 
+                Title = "Introduction to C#", 
+                Description = "Introduction to C#",
+                Program = "1. Getting Started",
+                TopicId = 1
+            };
+
+            var course2 = new Course()
+            {
+                Id = 11,
+                Title = "Introduction to Java",
+                Description = "Introduction to Java",
+                Program = "1. Getting Started",
+                TopicId = 2
+            };
+
+            var course3 = new Course()
+            {
+                Id = 12,
+                Title = "ASP.NET",
+                Description = "Web with ASP.NET",
+                Program = "1. Controllers and MVC",
+                TopicId = 1
+            };
+
+            var course4 = new Course()
+            {
+                Id = 13,
+                Title = "Unity",
+                Description = "Unity Game Development",
+                Program = "1. What is Unity",
+                TopicId = 1
+            };
+
+            modelBuilder.Entity<Course>().HasData(course1, course2, course3, course4);
 
             var teacher1 = new Teacher()
             {

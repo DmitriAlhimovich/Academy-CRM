@@ -13,14 +13,16 @@
         <table class="table table-bordered">
 
             <tr>
-                <th>Student</th>
+                <th>Created</th>
                 <th>Course</th>
+                <th>Student</th>
                 <th>Comments</th>
             </tr>
 
             @foreach (var request in Model.OrderBy(r => r.CourseTitle).ThenBy(r => r.StudentName))
             {
         <tr>
+            <td><a asp-controller="StudentRequests" asp-action="Edit" asp-route-id="@request.Id">@request.Created.ToShortDateString()</a></td>
             <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@request.CourseId">@request.CourseTitle</a></td>
             <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@request.StudentId">@request.StudentName</a></td>
             <td>@request.Comments</td>

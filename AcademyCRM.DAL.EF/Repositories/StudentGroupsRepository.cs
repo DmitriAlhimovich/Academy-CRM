@@ -22,6 +22,7 @@ namespace AcademyCRM.DAL.EF.Repositories
         public void Create(StudentGroup item)
         {
             _context.StudentGroups.Add(item);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)

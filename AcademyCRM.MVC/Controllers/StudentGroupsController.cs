@@ -29,21 +29,27 @@ namespace AcademyCRM.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            var group = _groupService.GetById(id);
+            var model = id.HasValue
+                ? _mapper.Map<StudentGroupModel>(_groupService.GetById(id.Value))
+                : new StudentGroupModel();
 
             ViewBag.Teachers = _mapper.Map<IEnumerable<TeacherModel>>(_teacherService.GetAll());
             ViewBag.IsAdmin = HttpContext.User.IsInRole("admin");
 
-            return View(_mapper.Map<StudentGroupModel>(group));
+            return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "admin")]
         public IActionResult Edit(StudentGroupModel groupModel)
         {
-            _groupService.Update(_mapper.Map<StudentGroup>(groupModel));
+            var group = _mapper.Map<StudentGroup>(groupModel);
+            if (groupModel.Id > 0)
+                _groupService.Update(group);
+            else
+                _groupService.Create(group);
 
             return RedirectToAction("Index");
         }

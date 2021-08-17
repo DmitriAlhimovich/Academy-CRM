@@ -23,9 +23,19 @@ namespace AcademyCRM.BLL.Services
             return _repository.Get(id);
         }
 
+        public void Create(StudentGroup entity)
+        {
+            _repository.Create(entity);
+        }
+
         public void Update(StudentGroup group)
         {
             _repository.Update(group);
+        }
+
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -36,7 +36,10 @@
     <div class="form-group">
         <label asp-for="GroupId"></label>
         <select class="form-control" asp-for="GroupId" required>
-            @if (ViewBag.Groups != null) foreach (var group in (List<StudentGroupModel>)ViewBag.Groups)
+            <option value="">Select group...</option>
+            @if (ViewBag.Groups != null)
+                foreach (var group in (List
+                <StudentGroupModel>)ViewBag.Groups)
                 {
                     if (group.Id == Model.GroupId)
                     {

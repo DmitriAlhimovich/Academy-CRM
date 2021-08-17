@@ -7,54 +7,67 @@
 
 @using (Html.BeginForm("Edit", "StudentRequests", FormMethod.Post))
 {
-    @Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.Id)
 
-    <div>
-        @Html.ValidationSummary()
-    </div>
+<div>
+    @Html.ValidationSummary()
+</div>
 
-    <div class="form-group">
-        <label asp-for="Created"></label>
-        <input class="form-control" type="date" asp-for="Created" readonly="readonly" />
-    </div>
+<div class="form-group">
+    <label asp-for="Created"></label>
+    <input class="form-control" type="date" asp-for="Created" readonly="readonly" />
+</div>
 
-    <div class="form-group">
-        <label asp-for="StudentId"></label>
-        <select class="form-control" asp-for="StudentId" required>
-            @if (ViewBag.Students != null) foreach (var student in (List<StudentModel>)ViewBag.Students)
+<div class="form-group">
+    <div class="row align-items-end">
+        <div class="col-10">
+            <label asp-for="StudentId">Student</label>
+            <select class="form-control" asp-for="StudentId" required>
+                <option value="">Select student...</option>
+                @if (ViewBag.Students != null)
+                foreach (var student in (List
+                <StudentModel>)ViewBag.Students)
                 {
-                    if (student.Id == Model.StudentId)
-                    {
-                        <option value="@student.Id" selected>@student.FullName</option>
-                    }
-                    else
-                    {
-                        <option value="@student.Id">@student.FullName</option>
-                    }
-                }
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="CourseId"></label>
-        <select class="form-control" asp-for="CourseId" required>
-            @if (ViewBag.Courses != null) foreach (var course in (List<CourseModel>)ViewBag.Courses)
+                if (student.Id == Model.StudentId)
                 {
-                    if (course.Id == Model.CourseId)
-                    {
-                        <option value="@course.Id" selected>@course.Title</option>
-                    }
-                    else
-                    {
-                        <option value="@course.Id">@course.Title</option>
-                    }
+                <option value="@student.Id" selected>@student.FullName</option>
                 }
-        </select>
+                else
+                {
+                <option value="@student.Id">@student.FullName</option>
+                }
+                }
+            </select>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-info" asp-controller="Students" asp-action="Edit">Add New</a>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-success">Save</button>
-    </div>
+<div class="form-group">
+    <label asp-for="CourseId">Course</label>
+    <select class="form-control" asp-for="CourseId" required>
+        <option value="">Select course...</option>
+        @if (ViewBag.Courses != null)
+            foreach (var course in (List
+            <CourseModel>)ViewBag.Courses)
+            {
+            if (course.Id == Model.CourseId)
+            {
+        <option value="@course.Id" selected>@course.Title</option>
+            }
+            else
+            {
+        <option value="@course.Id">@course.Title</option>
+            }
+            }
+    </select>
+</div>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-success">Save</button>
+</div>
 }
 
 @section Scripts {

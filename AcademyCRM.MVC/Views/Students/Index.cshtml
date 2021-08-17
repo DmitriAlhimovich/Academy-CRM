@@ -5,22 +5,26 @@
 }
 <h1>Students</h1>
 
-<table class="table table-bordered">
-
-    <tr>
-        <th>Name</th>
-        <th>Group</th>
-    </tr>
-
-    @foreach (var student in Model.OrderBy(s => s.LastName))
-    {
+<div class="row ">
+    <a class="btn btn-info" asp-controller="Students" asp-action="Edit">Add New</a>
+</div>
+<div class="row mt-2">
+    <table class="table table-bordered">
         <tr>
-            <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">@student.LastName @student.FirstName</a></td>
-            <td><a asp-controller="StudentGroups" asp-action="Edit" asp-route-id="@student.GroupId">@student.Group.Title</a> (<i>@student.Group.Status</i>)</td>
+            <th>Name</th>
+            <th>Group</th>
         </tr>
-    }
 
-    <tr>
-        <th><div class="text-info">Total: @Model.Count()</div></th>
-    </tr>
-</table>
+        @foreach (var student in Model.OrderBy(s => s.LastName))
+        {
+            <tr>
+                <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">@student.FullName</a></td>
+                <td><a asp-controller="StudentGroups" asp-action="Edit" asp-route-id="@student.GroupId">@student.Group.Title</a> (<i>@student.Group.Status</i>)</td>
+            </tr>
+        }
+
+        <tr>
+            <th><div class="text-info">Total: @Model.Count()</div></th>
+        </tr>
+    </table>
+</div>

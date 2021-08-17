@@ -29,7 +29,10 @@
     <div class="form-group">
         <label asp-for="TopicId"></label>
         <select class="form-control" asp-for="TopicId" required>
-            @if (ViewBag.Topics != null) foreach (var topic in (List<TopicModel>)ViewBag.Topics)
+            <option value="">Select topic...</option>
+            @if (ViewBag.Topics != null)
+            {
+                foreach (var topic in (List<TopicModel>)ViewBag.Topics)
                 {
                     if (topic.Id == Model.TopicId)
                     {
@@ -40,6 +43,7 @@
                         <option value="@topic.Id">@topic.Title</option>
                     }
                 }
+            }
         </select>
     </div>
 
