@@ -4,10 +4,12 @@ using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
+    [Authorize(Roles = "admin, manager, student")]
     public class StudentRequestsController : Controller
     {
         private readonly IEntityService<StudentRequest> _requestService;

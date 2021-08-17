@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcademyCRM.MVC.Controllers
 {
-    [Authorize(Roles = "admin, methodist")]
+    [Authorize(Roles = "admin, manager")]
     public class StudentGroupsController : Controller
     {
         private readonly IStudentGroupService _groupService;
@@ -34,11 +34,13 @@ namespace AcademyCRM.MVC.Controllers
             var group = _groupService.GetById(id);
 
             ViewBag.Teachers = _mapper.Map<IEnumerable<TeacherModel>>(_teacherService.GetAll());
+            ViewBag.IsAdmin = HttpContext.User.IsInRole("admin");
 
             return View(_mapper.Map<StudentGroupModel>(group));
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(StudentGroupModel groupModel)
         {
             _groupService.Update(_mapper.Map<StudentGroup>(groupModel));
