@@ -67,6 +67,8 @@ namespace AcademyCRM.MVC.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Edit(StudentGroupModel groupModel)
         {
+            if (!ModelState.IsValid) return View(groupModel);
+
             var group = _mapper.Map<StudentGroup>(groupModel);
             if (groupModel.Id > 0)
                 _groupService.Update(group);

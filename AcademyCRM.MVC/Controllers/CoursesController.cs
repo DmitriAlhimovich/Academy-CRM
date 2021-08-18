@@ -67,16 +67,14 @@ namespace AcademyCRM.MVC.Controllers
         [HttpPost]
         public IActionResult Edit(CourseModel courseModel)
         {
-            if (ModelState.IsValid)
-            {
-                var course = _mapper.Map<Course>(courseModel);
-                if (courseModel.Id > 0)
-                    _courseService.Update(course);
-                else
-                    _courseService.Create(course);
-                return RedirectToAction("Index");
-            }
-            return View(courseModel);
+            if (!ModelState.IsValid) return View(courseModel);
+
+            var course = _mapper.Map<Course>(courseModel);
+            if (courseModel.Id > 0)
+                _courseService.Update(course);
+            else
+                _courseService.Create(course);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -44,16 +44,14 @@ namespace AcademyCRM.MVC.Controllers
         [HttpPost]
         public IActionResult Edit(StudentRequestModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var request = _mapper.Map<StudentRequest>(model);
-                if (model.Id > 0)
-                    _requestService.Update(request);
-                else
-                    _requestService.Create(request);
-                return RedirectToAction("Index");
-            }
-            return View(model);
+            if (!ModelState.IsValid) return View(model);
+
+            var request = _mapper.Map<StudentRequest>(model);
+            if (model.Id > 0)
+                _requestService.Update(request);
+            else
+                _requestService.Create(request);
+            return RedirectToAction("Index");
         }
     }
 }
