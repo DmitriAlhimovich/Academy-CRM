@@ -19,10 +19,4 @@ namespace AcademyCRM.BLL.Models
 
         public RequestStatus Status { get; set; }
     }
-
-    public enum RequestStatus
-    {
-        Open,
-        Closed
-    }
 }
