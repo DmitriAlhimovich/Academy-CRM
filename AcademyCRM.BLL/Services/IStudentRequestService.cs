@@ -7,7 +7,7 @@ namespace AcademyCRM.BLL.Services
     {
         IEnumerable<StudentRequest> GetOpenRequestsByCourse(int courseId);
         int GetOpenRequestsCountByCourse(int courseId);
-        IEnumerable<Student> GetStudentsByCourse(int courseId);
+        IEnumerable<Student> GetStudentsRequestedForCourse(int courseId);
         IEnumerable<StudentRequest> GetAllOpen();
     }
 }

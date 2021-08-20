@@ -76,7 +76,7 @@
         <button type="submit" class="btn btn-success">Save</button>
         @if (Model.Requests.Any())
         {
-            <a class="btn btn-success" asp-controller="StudentGroups" asp-action="Edit" asp-route-courseId="@Model.Id">Create New Group</a>
+            <a class="btn btn-success" asp-controller="StudentGroups" asp-action="Create" asp-route-courseId="@Model.Id">Create New Group</a>
         }
     </div>
 }

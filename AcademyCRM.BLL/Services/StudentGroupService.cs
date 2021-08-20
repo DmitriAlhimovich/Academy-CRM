@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.DAL;
 
@@ -31,15 +32,18 @@ namespace AcademyCRM.BLL.Services
         {
             _repository.Create(entity);
 
+            //find all requests related to new group
+            var requests = _requestService.GetOpenRequestsByCourse(entity.CourseId).ToList();
+
             //add students from requests to group
-            var studentsToGroup = _requestService.GetStudentsByCourse(entity.CourseId);
+            var studentsToGroup = requests.Select(r => r.Student);
             foreach (var student in studentsToGroup)
             {
                 student.GroupId = entity.Id;
                 _studentService.Update(student);
             }
+            
             //close requests
-            var requests = _requestService.GetOpenRequestsByCourse(entity.CourseId);
             foreach (var request in requests)
             {
                 request.Status = RequestStatus.Closed;

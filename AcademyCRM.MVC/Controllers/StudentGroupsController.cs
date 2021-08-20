@@ -34,37 +34,35 @@ namespace AcademyCRM.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id, int? courseId)
+        public IActionResult Create(int courseId)
         {
-            StudentGroupModel model;
-            if (id.HasValue)
+            var model = new StudentGroupModel
             {
-                var group = _groupService.GetById(id.Value);
-                model = _mapper.Map<StudentGroupModel>(group);
-                model.Students =_mapper.Map<IEnumerable<StudentModel>>(group.Students);
-            }
-            else
-            {
-                if (!courseId.HasValue)
-                    throw new ArgumentNullException($"{nameof(courseId)} should have value for group creation");
+                CourseId = courseId,
+                Students = _mapper.Map<IEnumerable<StudentModel>>(_requestService.GetStudentsRequestedForCourse(courseId))
+            };
 
-                model = new StudentGroupModel
-                {
-                    CourseId = courseId,
-                    Students = _mapper.Map<IEnumerable<StudentModel>>(
-                        _requestService.GetStudentsByCourse(courseId.Value))
-                };
-            }
+            FillTeachersAndCourses();
 
-            ViewBag.Teachers = _mapper.Map<IEnumerable<TeacherModel>>(_teacherService.GetAll());
-            ViewBag.Courses = _mapper.Map<IEnumerable<CourseModel>>(_courseService.GetAll());
-            ViewBag.IsAdmin = HttpContext.User.IsInRole("admin");
+            return View("Edit", model);
+        }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = _mapper.Map<StudentGroupModel>(_groupService.GetById(id));
+            FillTeachersAndCourses();
             return View(model);
         }
 
+        private void FillTeachersAndCourses()
+        {
+            ViewBag.Teachers = _mapper.Map<IEnumerable<TeacherModel>>(_teacherService.GetAll());
+            ViewBag.Courses = _mapper.Map<IEnumerable<CourseModel>>(_courseService.GetAll());
+        }
+
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "manager")]
         public IActionResult Edit(StudentGroupModel groupModel)
         {
             if (!ModelState.IsValid) return View(groupModel);
