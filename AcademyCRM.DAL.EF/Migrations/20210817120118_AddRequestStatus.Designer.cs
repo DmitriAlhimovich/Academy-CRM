@@ -4,14 +4,16 @@ using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210817120118_AddRequestStatus")]
+    partial class AddRequestStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,22 +138,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Id = 2,
                             FirstName = "Andrey",
                             LastName = "Antonov",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Ivan",
-                            LastName = "Petrov",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Sergey",
-                            LastName = "Ivashko",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = 0
                         });

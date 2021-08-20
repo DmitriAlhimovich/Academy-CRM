@@ -12,12 +12,25 @@
 
     <div class="form-group">
         <label asp-for="Title"></label>
-        <input class="form-control" type="text" asp-for="Title" required  />
+        <input class="form-control" type="text" asp-for="Title" required />
     </div>
 
     <div class="form-group">
-        <label asp-for="StartDate"></label>
-        <input class="form-control" type="date" asp-for="StartDate" />
+        <label asp-for="CourseId">Course</label>
+        <select class="form-control" asp-for="CourseId">
+            <option value="">Select course...</option>
+            @foreach (var course in (List<CourseModel>)ViewBag.Courses)
+            {
+                if (course.Id == Model.CourseId)
+                {
+                    <option value="@course.Id" selected>@course.Title</option>
+                }
+                else
+                {
+                    <option value="@course.Id">@course.Title (@course.TopicName)</option>
+                }
+            }
+        </select>
     </div>
 
     <div class="form-group">
@@ -27,8 +40,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="TeacherId"></label>
+        <label asp-for="TeacherId">Teacher</label>
         <select class="form-control" asp-for="TeacherId">
+            <option value="">Select teacher...</option>
             @foreach (var teacher in (List<TeacherModel>)ViewData["Teachers"])
             {
                 if (teacher.Id == Model.TeacherId)
@@ -42,6 +56,26 @@
             }
         </select>
     </div>
+
+    <div class="form-group">
+        <label asp-for="Students"></label>
+        <table class="table table-borderless table-sm">
+
+            @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td><a asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id">@student.FullName</a></td>
+                </tr>
+            }
+
+            <tr>
+                <th>
+                    <div class="text-info">Total: @Model.Students.Count()</div>
+                </th>
+            </tr>
+        </table>
+    </div>
+
     <div class="form-group">
         @if (ViewBag.IsAdmin)
         {

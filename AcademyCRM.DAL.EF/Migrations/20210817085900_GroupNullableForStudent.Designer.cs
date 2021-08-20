@@ -4,14 +4,16 @@ using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210817085900_GroupNullableForStudent")]
+    partial class GroupNullableForStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,6 +129,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                         {
                             Id = 1,
                             FirstName = "Oleg",
+                            GroupId = 1,
                             LastName = "Fedorov",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = 0
@@ -135,23 +138,8 @@ namespace AcademyCRM.DAL.EF.Migrations
                         {
                             Id = 2,
                             FirstName = "Andrey",
+                            GroupId = 1,
                             LastName = "Antonov",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Ivan",
-                            LastName = "Petrov",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Sergey",
-                            LastName = "Ivashko",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = 0
                         });
@@ -163,9 +151,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
@@ -182,8 +167,6 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("TeacherId");
 
                     b.ToTable("StudentGroups");
@@ -192,7 +175,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         new
                         {
                             Id = 1,
-                            CourseId = 10,
                             Status = 0,
                             TeacherId = 1,
                             Title = "ASPNET_21_1"
@@ -200,7 +182,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         new
                         {
                             Id = 2,
-                            CourseId = 11,
                             Status = 0,
                             TeacherId = 1,
                             Title = "Java_23_4"
@@ -222,9 +203,6 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -543,7 +521,7 @@ namespace AcademyCRM.DAL.EF.Migrations
             modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
                 {
                     b.HasOne("AcademyCRM.BLL.Models.StudentGroup", "Group")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
@@ -551,17 +529,9 @@ namespace AcademyCRM.DAL.EF.Migrations
 
             modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AcademyCRM.BLL.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
-
-                    b.Navigation("Course");
 
                     b.Navigation("Teacher");
                 });
@@ -643,11 +613,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
-                {
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

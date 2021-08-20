@@ -38,7 +38,7 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         {
-            return _entities.AsNoTracking().AsEnumerable().Where(predicate).ToList();
+            return _entities.AsEnumerable().Where(predicate).ToList();
         }
 
         public TEntity Get(int id) => _entities.Find(id);

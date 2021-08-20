@@ -4,14 +4,16 @@ using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    partial class AcademyContextModelSnapshot : ModelSnapshot
+    [Migration("20210817100615_AmendSeedForGroups")]
+    partial class AmendSeedForGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,22 +140,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                             LastName = "Antonov",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Type = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Ivan",
-                            LastName = "Petrov",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Sergey",
-                            LastName = "Ivashko",
-                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = 0
                         });
                 });
 
@@ -222,9 +208,6 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -543,7 +526,7 @@ namespace AcademyCRM.DAL.EF.Migrations
             modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
                 {
                     b.HasOne("AcademyCRM.BLL.Models.StudentGroup", "Group")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
@@ -643,11 +626,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
-                {
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

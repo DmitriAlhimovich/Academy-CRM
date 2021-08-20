@@ -14,12 +14,11 @@ namespace AcademyCRM.MVC.Models
         [Required]
         public string LastName { get; set; }
 
-        [BirthDate(18, ErrorMessage = "Must be older 18")]
         public DateTime? BirthDate { get; set; }
 
         [StringLength(maximumLength: 100, MinimumLength = 3, ErrorMessage = "Length must be 3-100")]
         public string Email { get; set; }
 
-        public string FullName { get; set; }
+        public string FullName => $"{LastName} {FirstName}";
     }
 }

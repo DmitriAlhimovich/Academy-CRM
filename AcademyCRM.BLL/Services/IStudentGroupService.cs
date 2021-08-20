@@ -3,10 +3,8 @@ using AcademyCRM.BLL.Models;
 
 namespace AcademyCRM.BLL.Services
 {
-    public interface IStudentGroupService
+    public interface IStudentGroupService : IEntityService<StudentGroup>
     {
-        IEnumerable<StudentGroup> GetAll();
-        StudentGroup GetById(int id);
-        void Update(StudentGroup group);
+        
     }
 }

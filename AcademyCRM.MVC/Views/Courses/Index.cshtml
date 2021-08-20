@@ -20,7 +20,7 @@
             @foreach (var course in Model.OrderBy(c => c.Title))
             {
                 <tr>
-                    <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">@course.Title</a></td>
+                    <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">@course.Title (@course.RequestsCount)</a></td>
                     <td>@course.Description</td>
                 </tr>
             }

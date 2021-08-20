@@ -13,12 +13,12 @@ namespace AcademyCRM.BLL
     {
         public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
         {
-            services.AddScoped<IEntityService<Topic>, EntityService<Topic>>();
+            services.AddScoped<IEntityService<Topic>, BaseEntityService<Topic>>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentGroupService, StudentGroupService>();
-            services.AddScoped<IEntityService<StudentRequest>, EntityService<StudentRequest>>();
+            services.AddScoped<IStudentRequestService, StudentRequestService>();
 
             return services;
         }

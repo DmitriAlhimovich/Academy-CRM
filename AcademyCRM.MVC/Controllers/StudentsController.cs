@@ -3,13 +3,11 @@ using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace AcademyCRM.MVC.Controllers
 {
-    [Authorize(Roles = "admin, manager")]
     public class StudentsController : Controller
     {
         private readonly IStudentService _studentsService;
@@ -30,13 +28,15 @@ namespace AcademyCRM.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            var student = _studentsService.GetById(id);
+            var model = id.HasValue
+                ? _mapper.Map<StudentModel>(_studentsService.GetById(id.Value))
+                : new StudentModel();
 
             ViewBag.Groups = _mapper.Map<IEnumerable<StudentGroupModel>>(_groupService.GetAll());
 
-            return View(_mapper.Map<StudentModel>(student));
+            return View(model);
         }
 
         [HttpPost]
@@ -44,12 +44,17 @@ namespace AcademyCRM.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _studentsService.Update(_mapper.Map<Student>(studentModel));
+                var student = _mapper.Map<Student>(studentModel);
+                if (studentModel.Id > 0)
+                    _studentsService.Update(student);
+                else
+                    _studentsService.Create(student);
+                
                 return RedirectToAction("Index");
             }
             return View(studentModel);
 
-            
+
         }
     }
 }
