@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.MVC", "AcademyCR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{945216BD-ADE7-459C-8562-6162A47925A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{945216BD-ADE7-459C-8562-6162A47925A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{945216BD-ADE7-459C-8562-6162A47925A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
