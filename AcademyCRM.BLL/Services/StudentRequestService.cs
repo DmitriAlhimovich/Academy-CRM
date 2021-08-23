@@ -29,9 +29,9 @@ namespace AcademyCRM.BLL.Services
             return _repository.Find(r => r.CourseId == courseId && r.Status == RequestStatus.Open).Count();
         }
 
-        public IEnumerable<Student> GetStudentsByCourse(int courseId)
+        public IEnumerable<Student> GetStudentsRequestedForCourse(int courseId)
         {
-            return _repository.GetAll().Where(r => r.CourseId == courseId).Select(r => r.Student).Distinct();
+            return _repository.GetAll().Where(r => r.Status == RequestStatus.Open && r.CourseId == courseId).Select(r => r.Student).Distinct();
         }
 
         
