@@ -22,7 +22,8 @@ namespace AcademyCRM.Angular.Controllers
         [HttpGet]
         public IEnumerable<CourseDto> Get()
         {
-            return _mapper.Map<IEnumerable<CourseDto>>(_service.GetAll());
+            var res = _mapper.Map<IEnumerable<CourseDto>>(_service.GetAll());
+            return res;
         }
     }
 }

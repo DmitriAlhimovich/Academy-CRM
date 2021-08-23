@@ -38,7 +38,7 @@ namespace AcademyCRM.Angular
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
+            services.AddScoped<IRepository<Course>, CoursesRepository>();
 
             services.AddScoped<ICourseService, CourseService>();
 
