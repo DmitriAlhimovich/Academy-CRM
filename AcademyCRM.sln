@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-
 VisualStudioVersion = 16.0.31515.178
-
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.BLL", "AcademyCRM.BLL\AcademyCRM.BLL.csproj", "{6C230D05-3F17-4EE8-9C74-8D9197616302}"
 EndProject
@@ -16,7 +14,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.BLL.Tests", "AcademyCRM.BLL.Tests\AcademyCRM.BLL.Tests.csproj", "{B52A2EA7-3090-45D6-820D-3EC62B643179}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.MVC", "AcademyCRM.MVC\AcademyCRM.MVC.csproj", "{FCC483AF-1D24-4E11-A2BD-91741E10379B}"
-
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +45,14 @@ Global
 		{FCC483AF-1D24-4E11-A2BD-91741E10379B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC483AF-1D24-4E11-A2BD-91741E10379B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC483AF-1D24-4E11-A2BD-91741E10379B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A17952BE-01F6-45E9-B725-237E0069C13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A17952BE-01F6-45E9-B725-237E0069C13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A17952BE-01F6-45E9-B725-237E0069C13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A17952BE-01F6-45E9-B725-237E0069C13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{945216BD-ADE7-459C-8562-6162A47925A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{945216BD-ADE7-459C-8562-6162A47925A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{945216BD-ADE7-459C-8562-6162A47925A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{945216BD-ADE7-459C-8562-6162A47925A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
