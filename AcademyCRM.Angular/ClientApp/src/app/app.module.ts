@@ -28,8 +28,10 @@ import { CoursesComponent } from './courses/courses.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'courses', component: CoursesComponent},
-    ])
+      //{ path: 'courses', redirectTo: 'courses/', pathMatch: 'full' },
+      { path: 'courses/:topicId', component: CoursesComponent },
+      { path: 'courses', component: CoursesComponent },
+    ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]
