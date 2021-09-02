@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.DAL;
 
@@ -16,6 +17,11 @@ namespace AcademyCRM.BLL.Services
         public IEnumerable<Student> GetAll()
         {
             return _repository.GetAll();
+        }
+
+        public Task<IEnumerable<Student>> GetAllAsync()
+        {
+            return _repository.GetAllAsync();
         }
 
         public Student GetById(int id)

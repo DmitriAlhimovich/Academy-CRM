@@ -31,6 +31,11 @@ namespace AcademyCRM.DAL.EF.Repositories
                 _context.Teachers.Remove(teacher);
         }
 
+        public async Task<IEnumerable<Teacher>> GetAllAsync()
+        {
+            return await _context.Teachers.ToListAsync();
+        }
+
         public IEnumerable<Teacher> Find(Func<Teacher, bool> predicate)
         {
             return _context.Teachers.Where(predicate).ToList();
