@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AcademyCRM.Api.Dto;
+using AcademyCRM.BLL.Models;
 using AcademyCRM.DAL.Dapper.Queries;
 using AutoMapper;
 using MediatR;
@@ -32,6 +33,12 @@ namespace AcademyCRM.Api.Controllers
         public async Task<CourseDto> GetById(int id)
         {
             return _mapper.Map<CourseDto>(await _mediator.Send(new GetCourseByIdQuery(id)));
+        }
+
+        [HttpPut]
+        public async Task Update(CourseDto course)
+        {
+            await _mediator.Send(new UpdateCourseCommand(_mapper.Map<Course>(course)));
         }
     }
 }
