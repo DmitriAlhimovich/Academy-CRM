@@ -24,5 +24,11 @@ namespace AcademyCRM.Api.Controllers
         {
             return _mapper.Map<IEnumerable<CourseDto>>(_service.GetAll());
         }
+
+        [HttpGet("byId")]
+        public CourseDto GetById(int id)
+        {
+            return _mapper.Map<CourseDto>(_service.GetById(id));
+        }
     }
 }

@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.BLL.Tests", "Aca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.MVC", "AcademyCRM.MVC\AcademyCRM.MVC.csproj", "{FCC483AF-1D24-4E11-A2BD-91741E10379B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.DAL.Dapper", "AcademyCRM.DAL.Dapper\AcademyCRM.DAL.Dapper.csproj", "{40504C6C-30C5-47BD-8994-32C10DB49C9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40504C6C-30C5-47BD-8994-32C10DB49C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40504C6C-30C5-47BD-8994-32C10DB49C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40504C6C-30C5-47BD-8994-32C10DB49C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40504C6C-30C5-47BD-8994-32C10DB49C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

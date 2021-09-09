@@ -37,7 +37,7 @@ namespace AcademyCRM.Api
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
+            services.AddScoped<IRepository<Course>, AcademyCRM.DAL.Dapper.Repositories.CoursesRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

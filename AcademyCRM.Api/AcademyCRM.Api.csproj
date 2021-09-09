@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AcademyCRM.BLL\AcademyCRM.BLL.csproj" />
+    <ProjectReference Include="..\AcademyCRM.DAL.Dapper\AcademyCRM.DAL.Dapper.csproj" />
     <ProjectReference Include="..\AcademyCRM.DAL.EF\AcademyCRM.DAL.EF.csproj" />
   </ItemGroup>
 
