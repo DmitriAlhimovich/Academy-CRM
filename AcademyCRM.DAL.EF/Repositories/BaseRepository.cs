@@ -41,6 +41,11 @@ namespace AcademyCRM.DAL.EF.Repositories
             return _entities.AsEnumerable().Where(predicate).ToList();
         }
 
+        public Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public TEntity Get(int id) => _entities.Find(id);
 
         public virtual IEnumerable<TEntity> GetAll()

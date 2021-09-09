@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AcademyCRM.Api.Dto;
-using AcademyCRM.BLL.Services;
+using AcademyCRM.DAL.Dapper.Queries;
 using AutoMapper;
+using MediatR;
 
 namespace AcademyCRM.Api.Controllers
 {
@@ -10,25 +12,26 @@ namespace AcademyCRM.Api.Controllers
     [Route("[controller]")]
     public class CoursesController : ControllerBase
     {
-        private readonly ICourseService _service;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public CoursesController(ICourseService service, IMapper mapper)
+        public CoursesController(IMediator mediator, IMapper mapper)
         {
-            _service = service;
+            _mediator = mediator;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<CourseDto> Get()
+        public async Task<IEnumerable<CourseDto>> Get()
         {
-            return _mapper.Map<IEnumerable<CourseDto>>(_service.GetAll());
+            var data = await _mediator.Send(new GetCoursesListQuery());
+            return _mapper.Map<IEnumerable<CourseDto>>(data);
         }
 
         [HttpGet("byId")]
-        public CourseDto GetById(int id)
+        public async Task<CourseDto> GetById(int id)
         {
-            return _mapper.Map<CourseDto>(_service.GetById(id));
+            return _mapper.Map<CourseDto>(await _mediator.Send(new GetCourseByIdQuery(id)));
         }
     }
 }

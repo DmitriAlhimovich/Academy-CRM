@@ -37,6 +37,11 @@ namespace AcademyCRM.DAL.EF.Repositories
             return _context.StudentGroups.Where(predicate).ToList();
         }
 
+        public Task<IEnumerable<StudentGroup>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public StudentGroup Get(int id) => _context.StudentGroups.Include(g => g.Students).First(g => g.Id == id);
 
         public IEnumerable<StudentGroup> GetAll()

@@ -1,23 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AcademyCRM.Api.Mapper;
-using AcademyCRM.BLL.Models;
-using AcademyCRM.BLL.Services;
-using AcademyCRM.DAL;
+using AcademyCRM.DAL.Dapper;
 using AcademyCRM.DAL.EF.Contexts;
-using AcademyCRM.DAL.EF.Repositories;
 using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademyCRM.Api
@@ -37,15 +28,14 @@ namespace AcademyCRM.Api
             services.AddDbContext<AcademyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IRepository<Course>, AcademyCRM.DAL.Dapper.Repositories.CoursesRepository>();
+            services.AddMediatR(typeof(DbConnectionService).Assembly);
+            services.AddSingleton<IDbConnectionService, DbConnectionService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AcademyCRM.Api", Version = "v1" });
             });
-
-            services.AddScoped<ICourseService, CourseService>();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {

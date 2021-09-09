@@ -36,6 +36,11 @@ namespace AcademyCRM.DAL.EF.Repositories
             return _context.Teachers.Where(predicate).ToList();
         }
 
+        public Task<IEnumerable<Teacher>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Teacher Get(int id) => _context.Teachers.Find(id);
 
         public IEnumerable<Teacher> GetAll()

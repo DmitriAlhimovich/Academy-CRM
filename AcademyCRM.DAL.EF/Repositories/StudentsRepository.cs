@@ -37,6 +37,11 @@ namespace AcademyCRM.DAL.EF.Repositories
             return _context.Students.AsNoTracking().Where(predicate).ToList();
         }
 
+        public Task<IEnumerable<Student>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Student Get(int id) => _context.Students.Find(id);
 
         public IEnumerable<Student> GetAll()
