@@ -34,7 +34,7 @@ namespace AcademyCRM.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AcademyContext>(options =>
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademyCrmDB;Trusted_Connection=True;"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddDefaultUI()
@@ -49,7 +49,6 @@ namespace AcademyCRM.MVC
             services.AddScoped<IRepository<StudentRequest>, StudentRequestsRepository>();
 
             services.AddBusinessLogicServices();
-            //services.AddScoped<ICourseService, FakeCourseService>();
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
@@ -105,7 +104,7 @@ namespace AcademyCRM.MVC
 
             var roles = new[] { "admin", "manager", "student" };
 
-            
+
             foreach (var roleName in roles)
                 await roleManager.CreateAsync(new IdentityRole
                 {
