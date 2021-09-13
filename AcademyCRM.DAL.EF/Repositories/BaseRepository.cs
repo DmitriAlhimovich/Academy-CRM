@@ -21,19 +21,22 @@ namespace AcademyCRM.DAL.EF.Repositories
             _entities = context.Set<TEntity>();
         }
 
-
         public void Create(TEntity item)
         {
             _context.Entry(item).State = EntityState.Added;
             _context.SaveChanges();
         }
 
-        
         public void Delete(int id)
         {
             var entity = _entities.Find(id);
             if (entity != null)
                 _entities.Remove(entity);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _entities.ToListAsync();
         }
 
         public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
@@ -45,7 +48,7 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return _entities.ToList();
+            return GetAllAsync().Result;
         }
 
         public void Update(TEntity item)

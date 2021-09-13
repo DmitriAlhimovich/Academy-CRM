@@ -32,6 +32,13 @@ namespace AcademyCRM.DAL.EF.Repositories
                 _context.Students.Remove(student);
         }
 
+        public async Task<IEnumerable<Student>> GetAllAsync()
+        {
+            return await _context.Students.AsNoTracking()
+                .Include(s => s.Group)
+                .ToListAsync();
+        }
+
         public IEnumerable<Student> Find(Func<Student, bool> predicate)
         {
             return _context.Students.AsNoTracking().Where(predicate).ToList();

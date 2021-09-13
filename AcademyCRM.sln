@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.BLL.Tests", "Aca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.MVC", "AcademyCRM.MVC\AcademyCRM.MVC.csproj", "{FCC483AF-1D24-4E11-A2BD-91741E10379B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.Api", "AcademyCRM.Api\AcademyCRM.Api.csproj", "{945216BD-ADE7-459C-8562-6162A47925A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.Angular", "AcademyCRM.Angular\AcademyCRM.Angular.csproj", "{27E8F379-E237-4849-B485-4753647722F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.WebApi.IntegrationTests", "AcademyCRM.WebApi.IntegrationTests\AcademyCRM.WebApi.IntegrationTests.csproj", "{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,12 +55,17 @@ Global
 		{27E8F379-E237-4849-B485-4753647722F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E8F379-E237-4849-B485-4753647722F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B52A2EA7-3090-45D6-820D-3EC62B643179} = {B3E39AED-5372-45F6-A38C-0C276437D590}
+		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308} = {B3E39AED-5372-45F6-A38C-0C276437D590}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D852BD7A-1FEF-45E7-B91A-B0D62210F206}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services
@@ -15,6 +16,11 @@ namespace AcademyCRM.BLL.Services
         public IEnumerable<TEntity> GetAll()
         {
             return _repository.GetAll();
+        }
+
+        public Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return _repository.GetAllAsync();
         }
 
         public TEntity GetById(int id)
