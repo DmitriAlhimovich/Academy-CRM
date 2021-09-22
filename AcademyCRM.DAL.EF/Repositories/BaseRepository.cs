@@ -36,6 +36,7 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
+            throw new NullReferenceException();
             return await _entities.ToListAsync();
         }
 
