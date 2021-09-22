@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
+using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Middleware;
 
 namespace AcademyCRM.MVC
@@ -59,6 +60,10 @@ namespace AcademyCRM.MVC
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddMvc(options =>
+                options.Filters.Add<GlobalExceptionFilter>()
+            );
 
             services.AddControllersWithViews()
                 .AddViewOptions(options => options.HtmlHelperOptions.ClientValidationEnabled = true);
