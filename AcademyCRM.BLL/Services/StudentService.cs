@@ -26,7 +26,7 @@ namespace AcademyCRM.BLL.Services
 
         public Student GetById(int id)
         {
-            return _repository.Get(id);
+            return _repository.Get(id).EnsureNotNull();
         }
 
         public void Create(Student student)

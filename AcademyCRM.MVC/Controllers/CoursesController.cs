@@ -3,15 +3,18 @@ using System.Linq;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.MVC.Configuration;
+using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace AcademyCRM.MVC.Controllers
 {
+    [TypeFilter(typeof(LocalExceptionFilter), Order = int.MinValue)]
     [Authorize(Roles = "admin, manager, student")]
     public class CoursesController : Controller
     {
