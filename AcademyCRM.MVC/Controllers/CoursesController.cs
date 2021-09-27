@@ -85,5 +85,19 @@ namespace AcademyCRM.MVC.Controllers
 
             return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
         }
+
+        [HttpGet]
+        public IActionResult Filter()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Filter(FilterModel model)
+        {
+            var courses = _courseService.Search(model.ProgramContains);
+
+            return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
+        }
     }
 }
