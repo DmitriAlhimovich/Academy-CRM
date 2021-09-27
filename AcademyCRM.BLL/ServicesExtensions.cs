@@ -1,11 +1,6 @@
-﻿using AcademyCRM.BLL.Models;
-using AcademyCRM.BLL.Services;
+﻿using AcademyCRM.BLL.Services;
+using AcademyCRM.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademyCRM.BLL
 {

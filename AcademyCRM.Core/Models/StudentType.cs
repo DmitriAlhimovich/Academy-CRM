@@ -1,4 +1,4 @@
-﻿namespace AcademyCRM.BLL.Models
+﻿namespace AcademyCRM.Core.Models
 {
     public enum StudentType
     {

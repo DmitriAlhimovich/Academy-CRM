@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using AcademyCRM.BLL.Models;
+﻿using System.Collections.Generic;
+using AcademyCRM.Core.Models;
 
 namespace AcademyCRM.MVC.Models
 {

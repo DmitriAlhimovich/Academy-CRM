@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AcademyCRM.BLL.Models
+namespace AcademyCRM.Core.Models
 {
     public class Student : Person
     {
@@ -9,7 +9,7 @@ namespace AcademyCRM.BLL.Models
         public StudentType Type { get; set; }
 
         public int? GroupId { get; set; }
-        public StudentGroup? Group { get; set; }
+        public StudentGroup Group { get; set; }
 
         public Student EnsureNotNull()
         {

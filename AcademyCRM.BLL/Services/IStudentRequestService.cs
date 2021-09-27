@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AcademyCRM.BLL.Models;
+using AcademyCRM.Core.Models;
 
 namespace AcademyCRM.BLL.Services
 {

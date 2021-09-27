@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
-using AcademyCRM.BLL.Models;
+using System.Threading.Tasks;
+using AcademyCRM.Core.Models;
+using AcademyCRM.Core.Models.Filters;
 
 namespace AcademyCRM.BLL.Services
 {
     public interface ICourseService : IEntityService<Course>
     {
-        IEnumerable<Course> Search(string search);
+        Task<IEnumerable<Course>> Search(string search);
+        Task<IEnumerable<Course>> Filter(CourseFilter filter);
     }
 }

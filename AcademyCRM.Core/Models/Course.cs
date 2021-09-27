@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcademyCRM.BLL.Models
+﻿namespace AcademyCRM.Core.Models
 {
     public class Course
     {
@@ -20,12 +14,5 @@ namespace AcademyCRM.BLL.Models
         public CourseLevel Level { get; set; }
 
         public int DurationWeeks { get; set; }
-    }
-
-    public enum CourseLevel
-    {
-        Beginner,
-        Advanced,
-        Expert
     }
 }

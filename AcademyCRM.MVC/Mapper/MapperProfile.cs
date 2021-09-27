@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AcademyCRM.BLL.Models;
+﻿using AcademyCRM.Core.Models;
+using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
 
@@ -30,6 +27,8 @@ namespace AcademyCRM.MVC.Mapper
                 .ForMember(model => model.StudentName, map => map.MapFrom(r => r.Student.FullName))
                 .ForMember(model => model.CourseTitle, map => map.MapFrom(r => r.Course.Title))
                 .ReverseMap();
+            CreateMap<CourseFilter, CourseFilterViewModel>()
+               .ReverseMap();
         }
     }
 }

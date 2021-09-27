@@ -1,4 +1,4 @@
-﻿using AcademyCRM.BLL.Models;
+﻿using AcademyCRM.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

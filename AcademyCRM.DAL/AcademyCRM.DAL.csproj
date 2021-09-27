@@ -5,4 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AcademyCRM.Core\AcademyCRM.Core.csproj" />
+  </ItemGroup>
+
 </Project>

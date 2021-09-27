@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Extensions;
-using AcademyCRM.BLL.Models;
+using AcademyCRM.Core.Models;
+using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services
 {
     public class CourseService : ICourseService
     {
-        private readonly IRepository<Course> _repository;
+        private readonly ICourseRepository _repository;
 
-        public CourseService(IRepository<Course> repository)
+        public CourseService(ICourseRepository repository)
         {
             _repository = repository;
         }
 
         public IEnumerable<Course> GetAll()
         {
-            
+
             return _repository.GetAll();
         }
 
@@ -48,11 +49,21 @@ namespace AcademyCRM.BLL.Services
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Course> Search(string search)
+        public async Task<IEnumerable<Course>> Search(string search)
         {
-            return _repository.Find(c =>
-                c.Title.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase) ||
-                c.Description.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrWhiteSpace(search))
+                return await _repository.GetAllAsync();
+
+            return await Task.FromResult(_repository.Find(c =>
+               c.Title.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase) ||
+               c.Description.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase)));
+        }
+
+        public async Task<IEnumerable<Course>> Filter(CourseFilter filter)
+        {
+            var filteredCourses = _repository.Filter(filter);
+
+            return filteredCourses;
         }
     }
 }

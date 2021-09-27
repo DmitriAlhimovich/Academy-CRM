@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcademyCRM.BLL.Models
+namespace AcademyCRM.Core.Models
 {
     public class StudentGroup
     {
         public int Id { get; set; }
-        
+
         [Required]
         public string Title { get; set; }
 
@@ -15,7 +15,7 @@ namespace AcademyCRM.BLL.Models
         public Course Course { get; set; }
 
         public int? TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
+        public Teacher Teacher { get; set; }
 
         public DateTime? StartDate { get; set; }
 

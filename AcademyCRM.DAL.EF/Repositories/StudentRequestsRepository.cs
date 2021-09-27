@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AcademyCRM.BLL.Models;
+using AcademyCRM.Core.Models;
 using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 

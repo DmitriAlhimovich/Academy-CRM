@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcademyCRM.BLL.Models
+﻿namespace AcademyCRM.Core.Models
 {
     public class Topic
     {
@@ -14,6 +8,6 @@ namespace AcademyCRM.BLL.Models
         public string Description { get; set; }
 
         public int? ParentId { get; set; }
-        public Topic? Parent { get; set; }
+        public Topic Parent { get; set; }
     }
 }
