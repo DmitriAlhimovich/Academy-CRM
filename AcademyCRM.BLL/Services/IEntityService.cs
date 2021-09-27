@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AcademyCRM.BLL.Models;
 
 namespace AcademyCRM.BLL.Services
 {

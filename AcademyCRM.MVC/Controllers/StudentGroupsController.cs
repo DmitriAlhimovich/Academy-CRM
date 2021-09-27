@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using AcademyCRM.BLL.Models;
+﻿using System.Collections.Generic;
 using AcademyCRM.BLL.Services;
+using AcademyCRM.Core.Models;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;

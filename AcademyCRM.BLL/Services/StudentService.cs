@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AcademyCRM.BLL.Models;
+using AcademyCRM.Core.Models;
 using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services

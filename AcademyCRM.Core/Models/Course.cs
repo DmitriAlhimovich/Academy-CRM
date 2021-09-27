@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcademyCRM.BLL.Models
+﻿namespace AcademyCRM.Core.Models
 {
     public class Course
     {
@@ -14,5 +8,11 @@ namespace AcademyCRM.BLL.Models
         public string Program { get; set; }
         public int TopicId { get; set; }
         public Topic Topic { get; set; }
+
+        public double? Price { get; set; }
+
+        public CourseLevel Level { get; set; }
+
+        public int DurationWeeks { get; set; }
     }
 }

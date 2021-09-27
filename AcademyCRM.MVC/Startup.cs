@@ -1,12 +1,9 @@
 using AcademyCRM.BLL;
-using AcademyCRM.BLL.Models;
-using AcademyCRM.BLL.Services;
 using AcademyCRM.DAL;
 using AcademyCRM.DAL.EF.Contexts;
 using AcademyCRM.DAL.EF.Repositories;
 using AcademyCRM.MVC.Configuration;
 using AcademyCRM.MVC.Mapper;
-using AcademyCRM.MVC.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +17,7 @@ using System;
 using System.Threading.Tasks;
 using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Middleware;
+using AcademyCRM.Core.Models;
 
 namespace AcademyCRM.MVC
 {
@@ -44,8 +42,9 @@ namespace AcademyCRM.MVC
                  .AddDefaultTokenProviders();
 
             services.AddScoped<IRepository<Topic>, BaseRepository<Topic>>();
-            services.AddScoped<IRepository<Course>, BaseRepository<Course>>();
+            services.AddScoped<ICourseRepository, CoursesRepository>();
             services.AddScoped<IRepository<Teacher>, TeachersRepository>();
+
             services.AddScoped<IRepository<Student>, StudentsRepository>();
             services.AddScoped<IRepository<StudentGroup>, StudentGroupsRepository>();
             services.AddScoped<IRepository<StudentRequest>, StudentRequestsRepository>();

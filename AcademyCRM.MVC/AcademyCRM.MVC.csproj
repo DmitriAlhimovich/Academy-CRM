@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AcademyCRM.BLL\AcademyCRM.BLL.csproj" />
+    <ProjectReference Include="..\AcademyCRM.Core\AcademyCRM.Core.csproj" />
     <ProjectReference Include="..\AcademyCRM.DAL.EF\AcademyCRM.DAL.EF.csproj" />
   </ItemGroup>
 

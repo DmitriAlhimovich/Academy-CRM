@@ -1,0 +1,42 @@
+﻿@model CourseFilterViewModel
+
+@{
+    ViewData["Title"] = "Filter Courses";
+
+}
+
+<h1>Courses Advanced Search</h1>
+
+@using (Html.BeginForm("Filter", "Courses", FormMethod.Post))
+{
+    <div class="form-group">
+        <label asp-for="TitleContains">Title Contains</label>
+        <input class="form-control" type="text" asp-for="TitleContains" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DescriptionContains">Description Contains</label>
+        <input class="form-control" asp-for="DescriptionContains" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ProgramContains"></label>
+        <input class="form-control" asp-for="ProgramContains" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TopicNameContains">Topic Contains</label>
+        <input class="form-control" asp-for="TopicNameContains" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PriceFrom"></label>
+        <input class="form-control" asp-for="PriceFrom" type="number" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PriceTo"></label>
+        <input class="form-control" asp-for="PriceTo" type="number" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Apply</button>
+    </div>
+}

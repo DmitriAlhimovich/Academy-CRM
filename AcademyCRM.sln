@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.Angular", "Acade
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyCRM.WebApi.IntegrationTests", "AcademyCRM.WebApi.IntegrationTests\AcademyCRM.WebApi.IntegrationTests.csproj", "{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyCRM.Core", "AcademyCRM.Core\AcademyCRM.Core.csproj", "{8E6DC690-8ED7-4E35-84C7-3FCF94AE0DE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED2C858-CA4E-4DF6-A6EC-0FE70A40F308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6DC690-8ED7-4E35-84C7-3FCF94AE0DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6DC690-8ED7-4E35-84C7-3FCF94AE0DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6DC690-8ED7-4E35-84C7-3FCF94AE0DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6DC690-8ED7-4E35-84C7-3FCF94AE0DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

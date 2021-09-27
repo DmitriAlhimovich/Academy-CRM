@@ -1,21 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
+using AcademyCRM.Core.Models;
+using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.MVC.Configuration;
 using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace AcademyCRM.MVC.Controllers
 {
     [TypeFilter(typeof(LocalExceptionFilter), Order = int.MinValue)]
-    [Authorize(Roles = "admin, manager, student")]
     public class CoursesController : Controller
     {
         private readonly ICourseService _courseService;
@@ -60,7 +57,7 @@ namespace AcademyCRM.MVC.Controllers
         {
             var model = id.HasValue ? _mapper.Map<CourseModel>(_courseService.GetById(id.Value)) : new CourseModel();
 
-            if(id.HasValue)
+            if (id.HasValue)
                 model.Requests = _mapper.Map<IEnumerable<StudentRequestModel>>(_requestService.GetOpenRequestsByCourse(id.Value));
 
             ViewBag.Topics = _mapper.Map<IEnumerable<TopicModel>>(_topicService.GetAll());
@@ -78,6 +75,27 @@ namespace AcademyCRM.MVC.Controllers
             else
                 _courseService.Create(course);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Search(string search)
+        {
+            var courses = _courseService.Search(search);
+
+            return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
+        }
+
+        [HttpGet]
+        public IActionResult Filter()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<IActionResult> FilterAsync(CourseFilterViewModel model)
+        {
+            var courses = await _courseService.Filter(_mapper.Map<CourseFilter>(model));
+
+            return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
         }
     }
 }

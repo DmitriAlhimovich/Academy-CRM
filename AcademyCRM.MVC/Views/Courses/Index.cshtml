@@ -6,30 +6,51 @@
 <div id="container">
     <h1>Courses</h1>
 
-    <div class="row ">
-        <a class="btn btn-info" asp-controller="Courses" asp-action="Edit">Add New</a>
-    </div>
+    @await Html.PartialAsync("Partial/_Search")
+
     <div class="row mt-2">
         <table class="table table-bordered">
 
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <td>Level</td>
+                <td>Duration (weeks)</td>
+                <td>Price (BYN)</td>
             </tr>
-
-            @foreach (var course in Model.OrderBy(c => c.Title))
+            
+            @if (Model.Any())
+            {
+                @foreach (var course in Model.OrderBy(c => c.Title))
+                {
+                    <tr>
+                        <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">@course.Title (@course.RequestsCount)</a></td>
+                        <td>@course.Description</td>
+                        <td>@course.Level</td>
+                        <td>@course.DurationWeeks</td>
+                        <td>@course.Price</td>
+                    </tr>
+                }
+                <tr>
+                    <th>
+                        <div class="text-info">Total: @Model.Count()</div>
+                    </th>
+                </tr>
+            }
+            else
             {
                 <tr>
-                    <td><a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">@course.Title (@course.RequestsCount)</a></td>
-                    <td>@course.Description</td>
+                    <td colspan="10">No course was found</td>
                 </tr>
             }
 
-            <tr>
-                <th>
-                    <div class="text-info">Total: @Model.Count()</div>
-                </th>
-            </tr>
+            
         </table>
     </div>
+    @if (User is not null)
+    {
+        <div class="row ">
+            <a class="btn btn-info" asp-controller="Courses" asp-action="Edit">Add New</a>
+        </div>
+    }
 </div>
