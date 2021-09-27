@@ -32,7 +32,10 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Title = "Introduction to C#", 
                 Description = "Introduction to C#",
                 Program = "1. Getting Started",
-                TopicId = 1
+                TopicId = 1,
+                Price = 1250,
+                Level = CourseLevel.Beginner,
+                DurationWeeks = 8
             };
 
             var course2 = new Course()
@@ -41,7 +44,10 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Title = "Introduction to Java",
                 Description = "Introduction to Java",
                 Program = "1. Getting Started",
-                TopicId = 2
+                TopicId = 2,
+                Price = 1550,
+                Level = CourseLevel.Beginner,
+                DurationWeeks = 7
             };
 
             var course3 = new Course()
@@ -50,7 +56,10 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Title = "ASP.NET",
                 Description = "Web with ASP.NET",
                 Program = "1. Controllers and MVC",
-                TopicId = 1
+                TopicId = 1,
+                Price = 1350,
+                Level = CourseLevel.Advanced,
+                DurationWeeks = 16
             };
 
             var course4 = new Course()
@@ -59,10 +68,25 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Title = "Unity",
                 Description = "Unity Game Development",
                 Program = "1. What is Unity",
-                TopicId = 1
+                TopicId = 1,
+                Price = 1850,
+                Level = CourseLevel.Advanced,
+                DurationWeeks = 20
             };
 
-            modelBuilder.Entity<Course>().HasData(course1, course2, course3, course4);
+            var course5 = new Course()
+            {
+                Id = 15,
+                Title = "Design Patterns",
+                Description = "Design Patterns for Software development",
+                Program = "1. Decorator, 2. Bridge",
+                TopicId = 1,
+                Price = 2850,
+                Level = CourseLevel.Expert,
+                DurationWeeks = 18
+            };
+
+            modelBuilder.Entity<Course>().HasData(course1, course2, course3, course4, course5);
 
             var teacher1 = new Teacher()
             {

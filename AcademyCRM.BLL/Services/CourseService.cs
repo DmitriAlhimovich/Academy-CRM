@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AcademyCRM.BLL.Extensions;
 using AcademyCRM.BLL.Models;
 using AcademyCRM.DAL;
 
@@ -44,6 +46,13 @@ namespace AcademyCRM.BLL.Services
         public void Delete(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Course> Search(string search)
+        {
+            return _repository.Find(c =>
+                c.Title.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase) ||
+                c.Description.Contains(search.NormalizeSearchString(), StringComparison.OrdinalIgnoreCase));
         }
     }
 }

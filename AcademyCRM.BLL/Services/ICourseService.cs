@@ -5,5 +5,6 @@ namespace AcademyCRM.BLL.Services
 {
     public interface ICourseService : IEntityService<Course>
     {
+        IEnumerable<Course> Search(string search);
     }
 }

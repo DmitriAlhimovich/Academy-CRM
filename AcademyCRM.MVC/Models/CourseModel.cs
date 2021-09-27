@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AcademyCRM.BLL.Models;
 
 namespace AcademyCRM.MVC.Models
 {
@@ -12,6 +13,10 @@ namespace AcademyCRM.MVC.Models
         public string Program { get; set; }
         public int TopicId { get; set; }
         public string TopicName { get; set; }
+        public double? Price { get; set; }
+        public CourseLevel Level { get; set; }
+
+        public int DurationWeeks { get; set; }
         public int RequestsCount { get; set; }
         public IEnumerable<StudentRequestModel> Requests { get; set; }
     }
