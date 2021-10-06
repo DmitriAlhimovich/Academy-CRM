@@ -20,6 +20,8 @@ namespace AcademyCRM.Core.Models
 
         public string Phone { get; set; }
 
+        public byte[] Photo { get; set; }
+
         public string FullName => $"{LastName} {FirstName}";
     }
 }

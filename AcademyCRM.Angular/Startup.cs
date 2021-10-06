@@ -1,13 +1,12 @@
 using AcademyCRM.Angular.Mapper;
-using AcademyCRM.BLL.Models;
 using AcademyCRM.BLL.Services;
+using AcademyCRM.Core.Models;
 using AcademyCRM.DAL;
 using AcademyCRM.DAL.EF.Contexts;
 using AcademyCRM.DAL.EF.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

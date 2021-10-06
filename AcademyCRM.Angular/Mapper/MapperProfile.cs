@@ -1,5 +1,5 @@
 ﻿using AcademyCRM.Angular.Dto;
-using AcademyCRM.BLL.Models;
+using AcademyCRM.Core.Models;
 using AutoMapper;
 
 namespace AcademyCRM.Angular.Mapper

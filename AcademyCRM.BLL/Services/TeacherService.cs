@@ -43,5 +43,14 @@ namespace AcademyCRM.BLL.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public void SavePhoto(int id, byte[] content)
+        {
+            var teacher = _repository.Get(id);
+
+            teacher.Photo = content;
+
+            _repository.Update(teacher);
+        }
     }
 }
