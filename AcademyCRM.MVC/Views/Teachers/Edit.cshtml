@@ -8,6 +8,7 @@
 
 <ul class="nav nav-tabs">
     <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#photo">Photo</a></li>
     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#students">Students</a></li>
 </ul>
 
@@ -34,5 +35,13 @@
     <div id="students" class="tab-pane fade mt-2">
         <h1>All students</h1>
         <p>All students of the teacher</p>
+    </div>
+    <div id="photo" class="tab-pane fade mt-2">
+        <h1>Upload Photo</h1>
+        <form asp-action="UploadPhoto" asp-controller="Teachers" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(x => x.Id)
+            <input type="file" name="uploadedFile" /><br>
+            <input type="submit" value="Upload" />
+        </form>
     </div>
 </div>

@@ -19,6 +19,8 @@ namespace AcademyCRM.MVC.Models
         [StringLength(maximumLength: 100, MinimumLength = 3, ErrorMessage = "Length must be 3-100")]
         public string Email { get; set; }
 
+        public FileUpload FileUpload { get; set; }
+
         public string FullName => $"{LastName} {FirstName}";
     }
 }

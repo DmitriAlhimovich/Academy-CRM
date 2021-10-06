@@ -30,4 +30,8 @@
     <_ContentIncludedByDefault Remove="Views\Students\Edit.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\" />
+  </ItemGroup>
+
 </Project>
