@@ -5,14 +5,22 @@
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="courses">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Topic</th>
+      <th class="w-75">Title</th>
+      <th class="w-25">Topic</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let course of courses">
       <td>{{ course.title }}</td>
-      <td>{{ course.topicName }}</td>
+      <td>
+        <a [routerLink]="['/courses/', course.topicId]">
+          {{ course.topicName }}
+        </a>
+      </td>
+    </tr>
+    <tr *ngIf="topicId">
+      <td></td>
+      <td><a class="text-muted" [routerLink]="['/courses']">Clear filter</a></td>
     </tr>
   </tbody>
 </table>
