@@ -49,8 +49,13 @@
     </div>
     @if (User is not null)
     {
-        <div class="row ">
-            <a class="btn btn-info" asp-controller="Courses" asp-action="Edit">Add New</a>
-        </div>
+<div class="row ">
+    <div class="col-2">
+        <a class="btn btn-info" asp-controller="Courses" asp-action="Edit">Add New</a>
+    </div>
+    <div  class="col-2">
+        <a class="btn btn-success" asp-controller="Courses" asp-action="Download">Download as CSV</a>
+    </div>
+</div>
     }
 </div>

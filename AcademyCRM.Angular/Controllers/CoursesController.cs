@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using AcademyCRM.Angular.Dto;
 using AcademyCRM.BLL.Services;
 using AutoMapper;
@@ -24,5 +27,7 @@ namespace AcademyCRM.Angular.Controllers
         {
             return _mapper.Map<IEnumerable<CourseDto>>(_service.GetAll());
         }
+
+        
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using AcademyCRM.BLL.Services;
 using AcademyCRM.Core.Models;
 using AcademyCRM.Core.Models.Filters;
@@ -97,5 +100,16 @@ namespace AcademyCRM.MVC.Controllers
 
             return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
         }
+
+        [HttpGet("download")]
+        public async Task<IActionResult> Download()
+        {
+            Stream content = await _courseService.GetCsvContent();
+            var contentType = "text/plain";
+            var fileName = "courses.csv";
+            return File(content, contentType, fileName);
+        }
+
+        
     }
 }
