@@ -1,6 +1,8 @@
-﻿namespace AcademyCRM.Core.Models
+﻿using AcademyCRM.Core.Interfaces;
+
+namespace AcademyCRM.Core.Models
 {
-    public class Course
+    public class Course : IIdProperty
     {
         public int Id { get; set; }
         public string Title { get; set; }

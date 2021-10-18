@@ -1,6 +1,8 @@
-﻿namespace AcademyCRM.Core.Models
+﻿using AcademyCRM.Core.Interfaces;
+
+namespace AcademyCRM.Core.Models
 {
-    public class Topic
+    public class Topic :IIdProperty
     {
         public int Id { get; set; }
 
