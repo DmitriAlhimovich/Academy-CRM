@@ -53,7 +53,9 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public void Update(TEntity item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            //_context.Entry(item).State = EntityState.Modified;
+            var existingItem = _context.Find(typeof(TEntity), typeof(TEntity).GetProperty("Id")?.GetValue(item));
+            _context.Entry(existingItem).CurrentValues.SetValues(item);
             _context.SaveChanges();
         }
     }
