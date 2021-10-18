@@ -49,7 +49,9 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public void Update(StudentGroup item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            //_context.Entry(item).State = EntityState.Modified;
+            var existingItem = _context.StudentGroups.Find(item.Id);
+            _context.Entry(existingItem).CurrentValues.SetValues(item);
             _context.SaveChanges();
         }
     }
