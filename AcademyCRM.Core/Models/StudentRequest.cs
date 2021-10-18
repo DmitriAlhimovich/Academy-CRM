@@ -1,8 +1,9 @@
 ﻿using System;
+using AcademyCRM.Core.Interfaces;
 
 namespace AcademyCRM.Core.Models
 {
-    public class StudentRequest
+    public class StudentRequest : IIdProperty
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
