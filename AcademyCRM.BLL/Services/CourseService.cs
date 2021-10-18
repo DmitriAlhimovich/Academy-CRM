@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Extensions;
 using AcademyCRM.Core.Models;
@@ -64,6 +66,30 @@ namespace AcademyCRM.BLL.Services
             var filteredCourses = _repository.Filter(filter);
 
             return filteredCourses;
+        }
+
+        public async Task<Stream> GetCsvContent()
+        {
+            var courses = await GetAllAsync();
+
+            var sb = new StringBuilder();
+
+            foreach (var course in courses)
+            {
+                sb.AppendLine($"{course.Title};{course.Description};{course.Price}");
+            }
+
+            return GenerateStreamFromString(sb.ToString());            
+        }
+
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }
