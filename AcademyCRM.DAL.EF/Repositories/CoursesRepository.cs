@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AcademyCRM.Core.Filters;
 using AcademyCRM.Core.Models;
-using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.DAL.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace AcademyCRM.DAL.EF.Repositories
             _context = context;
         }
 
-        public IEnumerable<Course> Filter(CourseFilter filter)
+        public async Task<IEnumerable<Course>> Filter(CourseFilter filter)
         {
             var filteredCourses = _context.Courses.AsQueryable();
 
@@ -45,8 +46,32 @@ namespace AcademyCRM.DAL.EF.Repositories
             if (filter.DurationWeeksTo.HasValue)
                 filteredCourses = filteredCourses.Where(c => c.DurationWeeks <= filter.DurationWeeksTo.Value);
 
-            return filteredCourses.ToList();
+            return await filteredCourses.ToListAsync();
         }
+
+        public async Task<IEnumerable<Course>> Filter(IEnumerable<ISpecification<Course>> specifications)
+        {
+            var filteredCourses = _context.Courses.AsQueryable();
+
+            foreach (var specification in specifications)
+            {
+                filteredCourses = filteredCourses.Where(specification.ApplyFilter());
+            }
+
+            return await filteredCourses.ToListAsync();
+        }
+
+        //public Task<IEnumerable<Course>> Filter(IEnumerable<ISpecification<Course>> specifications)
+        //{
+        //    var filteredCourses = _context.Courses.AsEnumerable();
+
+        //    foreach (var specification in specifications)
+        //    {
+        //        filteredCourses = filteredCourses.Where(c => specification.IsSatisfied(c));
+        //    }
+
+        //    return Task.FromResult( filteredCourses.AsEnumerable());
+        //}
 
         public override IEnumerable<Course> GetAll()
         {

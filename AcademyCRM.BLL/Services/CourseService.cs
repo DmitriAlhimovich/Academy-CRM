@@ -4,8 +4,8 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Extensions;
+using AcademyCRM.Core.Filters;
 using AcademyCRM.Core.Models;
-using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.DAL;
 
 namespace AcademyCRM.BLL.Services
@@ -63,7 +63,7 @@ namespace AcademyCRM.BLL.Services
 
         public async Task<IEnumerable<Course>> Filter(CourseFilter filter)
         {
-            var filteredCourses = _repository.Filter(filter);
+            var filteredCourses = await _repository.Filter(filter.Specifications);
 
             return filteredCourses;
         }
