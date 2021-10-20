@@ -3,8 +3,8 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AcademyCRM.BLL.Services;
+using AcademyCRM.Core.Filters;
 using AcademyCRM.Core.Models;
-using AcademyCRM.Core.Models.Filters;
 using AcademyCRM.MVC.Configuration;
 using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Models;
@@ -94,9 +94,9 @@ namespace AcademyCRM.MVC.Controllers
         }
 
         [HttpPost]
-        public async System.Threading.Tasks.Task<IActionResult> FilterAsync(CourseFilterViewModel model)
+        public async Task<IActionResult> Filter(CourseFilterViewModel model)
         {
-            var courses = await _courseService.Filter(_mapper.Map<CourseFilter>(model));
+            var courses = await _courseService.Filter(model.MapToEntity());
 
             return View("Index", _mapper.Map<IEnumerable<CourseModel>>(courses));
         }
@@ -110,6 +110,6 @@ namespace AcademyCRM.MVC.Controllers
             return File(content, contentType, fileName);
         }
 
-        
+
     }
 }

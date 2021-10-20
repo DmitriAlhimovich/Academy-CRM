@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using AcademyCRM.Core.Models;
 
-namespace AcademyCRM.Core.Models.Filters
+namespace AcademyCRM.Core.Filters
 {
     public class CourseFilter
     {
@@ -13,5 +14,7 @@ namespace AcademyCRM.Core.Models.Filters
         public CourseLevel? Level { get; set; }
         public int? DurationWeeksFrom { get; set; }
         public int? DurationWeeksTo { get; set; }
+
+        public IEnumerable<ISpecification<Course>> Specifications { get; set; }
     }
 }
