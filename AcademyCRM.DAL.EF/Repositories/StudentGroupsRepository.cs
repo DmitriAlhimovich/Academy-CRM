@@ -44,7 +44,11 @@ namespace AcademyCRM.DAL.EF.Repositories
 
         public IEnumerable<StudentGroup> GetAll()
         {
-            return _context.StudentGroups.Include(g => g.Teacher).ToList();
+            var query = _context.StudentGroups.Include(g => g.Students);
+
+            var sql = query.ToQueryString();
+
+            return query.ToList();
         }
 
         public void Update(StudentGroup item)

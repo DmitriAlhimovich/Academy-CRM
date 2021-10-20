@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using AcademyCRM.MVC.Filters;
 using AcademyCRM.MVC.Middleware;
 using AcademyCRM.Core.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace AcademyCRM.MVC
 {
@@ -34,7 +36,12 @@ namespace AcademyCRM.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AcademyContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                    options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
+                    options.EnableSensitiveDataLogging();
+                }
+            );
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddDefaultUI()
