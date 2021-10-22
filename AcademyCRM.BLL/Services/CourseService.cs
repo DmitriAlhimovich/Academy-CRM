@@ -37,7 +37,7 @@ namespace AcademyCRM.BLL.Services
 
         public void Create(Course course)
         {
-            course.CourseCategory = null;
+            course.Categories = null;
             _repository.Create(course);
         }
 

@@ -72,7 +72,7 @@ namespace AcademyCRM.DAL.EF.Repositories
         public override IEnumerable<Course> GetAll()
         {
             return _context.Courses
-                .Include(c => c.CourseCategory)
+                .Include(c => c.Categories)
                 .ToList();
         }
     }

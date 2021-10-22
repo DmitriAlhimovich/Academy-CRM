@@ -11,8 +11,8 @@ namespace AcademyCRM.Core.Models
 
         public int ProgramId { get; set; }
         public CourseProgram Program { get; set; }
-        public int TopicId { get; set; }
-        public CourseCategory CourseCategory { get; set; }
+
+        public IEnumerable<CourseCategory> Categories { get; set; }
 
         public double? Price { get; set; }
 

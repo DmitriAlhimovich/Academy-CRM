@@ -1,4 +1,6 @@
-﻿using AcademyCRM.Core.Interfaces;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AcademyCRM.Core.Interfaces;
 
 namespace AcademyCRM.Core.Models
 {
@@ -11,5 +13,7 @@ namespace AcademyCRM.Core.Models
 
         public int? ParentId { get; set; }
         public CourseCategory Parent { get; set; }
+
+        public ICollection<Course> Courses { get; set; }
     }
 }
