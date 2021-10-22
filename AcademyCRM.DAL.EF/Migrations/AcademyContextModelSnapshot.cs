@@ -26,9 +26,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -47,12 +44,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TopicId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CourseCategoryId");
 
                     b.ToTable("Courses");
 
@@ -65,8 +57,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Level = 0,
                             Price = 1250.0,
                             ProgramId = 0,
-                            Title = "Introduction to C#",
-                            TopicId = 1
+                            Title = "Introduction to C#"
                         },
                         new
                         {
@@ -76,8 +67,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Level = 0,
                             Price = 1550.0,
                             ProgramId = 0,
-                            Title = "Introduction to Java",
-                            TopicId = 2
+                            Title = "Introduction to Java"
                         },
                         new
                         {
@@ -87,8 +77,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Level = 1,
                             Price = 1350.0,
                             ProgramId = 0,
-                            Title = "ASP.NET",
-                            TopicId = 1
+                            Title = "ASP.NET"
                         },
                         new
                         {
@@ -98,8 +87,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Level = 1,
                             Price = 1850.0,
                             ProgramId = 0,
-                            Title = "Unity",
-                            TopicId = 1
+                            Title = "Unity"
                         },
                         new
                         {
@@ -109,8 +97,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             Level = 2,
                             Price = 2850.0,
                             ProgramId = 0,
-                            Title = "Design Patterns",
-                            TopicId = 1
+                            Title = "Design Patterns"
                         });
                 });
 
@@ -613,6 +600,21 @@ namespace AcademyCRM.DAL.EF.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CourseCourseCategory", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriesId", "CoursesId");
+
+                    b.HasIndex("CoursesId");
+
+                    b.ToTable("CourseToCategories");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -809,15 +811,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AcademyCRM.Core.Models.Course", b =>
-                {
-                    b.HasOne("AcademyCRM.Core.Models.CourseCategory", "CourseCategory")
-                        .WithMany()
-                        .HasForeignKey("CourseCategoryId");
-
-                    b.Navigation("CourseCategory");
-                });
-
             modelBuilder.Entity("AcademyCRM.Core.Models.CourseCategory", b =>
                 {
                     b.HasOne("AcademyCRM.Core.Models.CourseCategory", "Parent")
@@ -1006,6 +999,21 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Navigation("Lesson");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("CourseCourseCategory", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.CourseCategory", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

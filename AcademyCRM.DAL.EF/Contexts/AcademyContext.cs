@@ -1,5 +1,5 @@
 ﻿using AcademyCRM.Core.Models;
-using AcademyCRM.DAL.EF.Migrations;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,14 +24,22 @@ namespace AcademyCRM.DAL.EF.Contexts
         public DbSet<StudentVisit> StudentVisits { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
 
-        public AcademyContext(DbContextOptions<AcademyContext> options) : base(options) { }
+        public AcademyContext(DbContextOptions<AcademyContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Course>().HasOne(c => c.Program).WithOne(p => p.Course).HasForeignKey<CourseProgram>(p => p.CourseId);
-            modelBuilder.Entity<StudentGroup>().HasOne(g => g.Schedule).WithOne(s => s.Group).HasForeignKey<Schedule>(s => s.GroupId);
+            modelBuilder.Entity<Course>().HasOne(c => c.Program).WithOne(p => p.Course)
+                .HasForeignKey<CourseProgram>(p => p.CourseId);
+
+            modelBuilder.Entity<Course>().HasMany(c => c.Categories).WithMany(cat => cat.Courses)
+                .UsingEntity(j => j.ToTable("CourseToCategories"));
+
+            modelBuilder.Entity<StudentGroup>().HasOne(g => g.Schedule).WithOne(s => s.Group)
+                .HasForeignKey<Schedule>(s => s.GroupId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<CourseProgram>().HasMany<CourseTopic>().WithOne().HasForeignKey(t => t.ProgramId)
                 .OnDelete(DeleteBehavior.Cascade);

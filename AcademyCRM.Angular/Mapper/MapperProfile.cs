@@ -9,7 +9,6 @@ namespace AcademyCRM.Angular.Mapper
         public MappingProfile()
         {
             CreateMap<Course, CourseDto>()
-                .ForMember(model => model.TopicName, map => map.MapFrom(c => c.CourseCategory.Title))
                 .ReverseMap();
         }
     }

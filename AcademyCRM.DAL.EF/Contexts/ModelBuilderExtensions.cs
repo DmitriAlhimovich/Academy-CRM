@@ -26,7 +26,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 10, 
                 Title = "Introduction to C#", 
                 Description = "Introduction to C#",
-                TopicId = 1,
                 Price = 1250,
                 Level = CourseLevel.Beginner,
                 DurationWeeks = 8
@@ -37,7 +36,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 11,
                 Title = "Introduction to Java",
                 Description = "Introduction to Java",
-                TopicId = 2,
                 Price = 1550,
                 Level = CourseLevel.Beginner,
                 DurationWeeks = 7
@@ -48,7 +46,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 12,
                 Title = "ASP.NET",
                 Description = "Web with ASP.NET",
-                TopicId = 1,
                 Price = 1350,
                 Level = CourseLevel.Advanced,
                 DurationWeeks = 16
@@ -59,7 +56,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 13,
                 Title = "Unity",
                 Description = "Unity Game Development",
-                TopicId = 1,
                 Price = 1850,
                 Level = CourseLevel.Advanced,
                 DurationWeeks = 20
@@ -70,7 +66,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 15,
                 Title = "Design Patterns",
                 Description = "Design Patterns for Software development",
-                TopicId = 1,
                 Price = 2850,
                 Level = CourseLevel.Expert,
                 DurationWeeks = 18
