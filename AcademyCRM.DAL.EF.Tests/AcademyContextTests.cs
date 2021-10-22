@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace AcademyCRM.DAL.EF.Tests
 {
-    public class Tests
+    public class AcademyContextTests
     {
         private AcademyContext _context;
 
