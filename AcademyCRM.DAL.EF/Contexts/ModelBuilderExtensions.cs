@@ -7,26 +7,25 @@ namespace AcademyCRM.DAL.EF.Contexts
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            var topic1 = new Topic()
+            var topic1 = new CourseCategory()
             {
                 Id = 1,
                 Title = ".Net",
                 Description = ".Net (ASP.NET, Unity)"
             };
-            var topic2 = new Topic()
+            var topic2 = new CourseCategory()
             {
                 Id = 2,
                 Title = "Java",
                 Description = "Full-stack, JS, Spring"
             };
-            modelBuilder.Entity<Topic>().HasData(topic1, topic2);
+            modelBuilder.Entity<CourseCategory>().HasData(topic1, topic2);
 
             var course1 = new Course()
             {
                 Id = 10, 
                 Title = "Introduction to C#", 
                 Description = "Introduction to C#",
-                Program = "1. Getting Started",
                 TopicId = 1,
                 Price = 1250,
                 Level = CourseLevel.Beginner,
@@ -38,7 +37,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 11,
                 Title = "Introduction to Java",
                 Description = "Introduction to Java",
-                Program = "1. Getting Started",
                 TopicId = 2,
                 Price = 1550,
                 Level = CourseLevel.Beginner,
@@ -50,7 +48,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 12,
                 Title = "ASP.NET",
                 Description = "Web with ASP.NET",
-                Program = "1. Controllers and MVC",
                 TopicId = 1,
                 Price = 1350,
                 Level = CourseLevel.Advanced,
@@ -62,7 +59,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 13,
                 Title = "Unity",
                 Description = "Unity Game Development",
-                Program = "1. What is Unity",
                 TopicId = 1,
                 Price = 1850,
                 Level = CourseLevel.Advanced,
@@ -74,7 +70,6 @@ namespace AcademyCRM.DAL.EF.Contexts
                 Id = 15,
                 Title = "Design Patterns",
                 Description = "Design Patterns for Software development",
-                Program = "1. Decorator, 2. Bridge",
                 TopicId = 1,
                 Price = 2850,
                 Level = CourseLevel.Expert,

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademyCRM.DAL.EF.Migrations
 {
     [DbContext(typeof(AcademyContext))]
-    [Migration("20210927123850_CoursePriceDuration")]
-    partial class CoursePriceDuration
+    [Migration("20211022115037_AddVisitsMaterialsModels")]
+    partial class AddVisitsMaterialsModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,15 +21,17 @@ namespace AcademyCRM.DAL.EF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CourseCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DurationWeeks")
@@ -41,12 +43,10 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Property<double?>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("Program")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TopicId")
@@ -54,7 +54,7 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TopicId");
+                    b.HasIndex("CourseCategoryId");
 
                     b.ToTable("Courses");
 
@@ -66,7 +66,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             DurationWeeks = 8,
                             Level = 0,
                             Price = 1250.0,
-                            Program = "1. Getting Started",
+                            ProgramId = 0,
                             Title = "Introduction to C#",
                             TopicId = 1
                         },
@@ -77,7 +77,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             DurationWeeks = 7,
                             Level = 0,
                             Price = 1550.0,
-                            Program = "1. Getting Started",
+                            ProgramId = 0,
                             Title = "Introduction to Java",
                             TopicId = 2
                         },
@@ -88,7 +88,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             DurationWeeks = 16,
                             Level = 1,
                             Price = 1350.0,
-                            Program = "1. Controllers and MVC",
+                            ProgramId = 0,
                             Title = "ASP.NET",
                             TopicId = 1
                         },
@@ -99,7 +99,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                             DurationWeeks = 20,
                             Level = 1,
                             Price = 1850.0,
-                            Program = "1. What is Unity",
+                            ProgramId = 0,
                             Title = "Unity",
                             TopicId = 1
                         },
@@ -110,13 +110,216 @@ namespace AcademyCRM.DAL.EF.Migrations
                             DurationWeeks = 18,
                             Level = 2,
                             Price = 2850.0,
-                            Program = "1. Decorator, 2. Bridge",
+                            ProgramId = 0,
                             Title = "Design Patterns",
                             TopicId = 1
                         });
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("CourseCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = ".Net (ASP.NET, Unity)",
+                            Title = ".Net"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Full-stack, JS, Spring",
+                            Title = "Java"
+                        });
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TopicId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TopicId");
+
+                    b.HasIndex("TopicId1");
+
+                    b.ToTable("CourseMaterials");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseProgram", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.ToTable("CoursePrograms");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseTopic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProgramId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.HasIndex("ProgramId1");
+
+                    b.ToTable("CourseTopics");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("EndedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GroupId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ScheduledLessonId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("GroupId1");
+
+                    b.HasIndex("ScheduledLessonId");
+
+                    b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId")
+                        .IsUnique();
+
+                    b.ToTable("Schedules");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.ScheduledWeeklyLesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Hour")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("Minute")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("ScheduledWeeklyItems");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,6 +346,9 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -191,7 +397,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,6 +405,9 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ScheduleId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("StartDate")
@@ -241,7 +450,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentRequest", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,6 +472,9 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StudentId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
@@ -272,10 +484,83 @@ namespace AcademyCRM.DAL.EF.Migrations
 
                     b.HasIndex("StudentId");
 
+                    b.HasIndex("StudentId1");
+
                     b.ToTable("StudentRequests");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Teacher", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentToGroupAssignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DismissedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudentId1");
+
+                    b.ToTable("StudentAssignments");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentVisit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LessonId1")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("Mark")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("LessonId1");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("StudentId1");
+
+                    b.ToTable("StudentVisits");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -301,11 +586,13 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkToProfile")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -325,45 +612,6 @@ namespace AcademyCRM.DAL.EF.Migrations
                             FirstName = "Sergey",
                             LastName = "Gromov",
                             LinkToProfile = "https://www.linkedin.com/feed/"
-                        });
-                });
-
-            modelBuilder.Entity("AcademyCRM.BLL.Models.CourseCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Topics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = ".Net (ASP.NET, Unity)",
-                            Title = ".Net"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Full-stack, JS, Spring",
-                            Title = "Java"
                         });
                 });
 
@@ -563,35 +811,124 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.Course", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.CourseCategory", "CourseCategory")
+                    b.HasOne("AcademyCRM.Core.Models.CourseCategory", "CourseCategory")
+                        .WithMany()
+                        .HasForeignKey("CourseCategoryId");
+
+                    b.Navigation("CourseCategory");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseCategory", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.CourseCategory", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseMaterial", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.CourseTopic", null)
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CourseCategory");
+                    b.HasOne("AcademyCRM.Core.Models.CourseTopic", "Topic")
+                        .WithMany("Materials")
+                        .HasForeignKey("TopicId1");
+
+                    b.Navigation("Topic");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseProgram", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.StudentGroup", "Group")
+                    b.HasOne("AcademyCRM.Core.Models.Course", "Course")
+                        .WithOne("Program")
+                        .HasForeignKey("AcademyCRM.Core.Models.CourseProgram", "CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseTopic", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.CourseProgram", null)
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.CourseProgram", "Program")
+                        .WithMany("Topics")
+                        .HasForeignKey("ProgramId1");
+
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Lesson", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.StudentGroup", null)
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.StudentGroup", "Group")
+                        .WithMany("Lessons")
+                        .HasForeignKey("GroupId1");
+
+                    b.HasOne("AcademyCRM.Core.Models.ScheduledWeeklyLesson", "ScheduledLesson")
+                        .WithMany()
+                        .HasForeignKey("ScheduledLessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("ScheduledLesson");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Schedule", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.StudentGroup", "Group")
+                        .WithOne("Schedule")
+                        .HasForeignKey("AcademyCRM.Core.Models.Schedule", "GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.ScheduledWeeklyLesson", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.Schedule", null)
+                        .WithMany("WeeklyLessons")
+                        .HasForeignKey("ScheduleId");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Student", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.StudentGroup", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentGroup", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.Course", "Course")
+                    b.HasOne("AcademyCRM.Core.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AcademyCRM.BLL.Models.Teacher", "Teacher")
+                    b.HasOne("AcademyCRM.Core.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
 
@@ -600,32 +937,77 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentRequest", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentRequest", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.Course", "Course")
+                    b.HasOne("AcademyCRM.Core.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AcademyCRM.BLL.Models.Student", "Student")
+                    b.HasOne("AcademyCRM.Core.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId1");
 
                     b.Navigation("Course");
 
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.CourseCategory", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentToGroupAssignment", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.CourseCategory", "Parent")
+                    b.HasOne("AcademyCRM.Core.Models.StudentGroup", "Group")
                         .WithMany()
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Parent");
+                    b.HasOne("AcademyCRM.Core.Models.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId1");
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentVisit", b =>
+                {
+                    b.HasOne("AcademyCRM.Core.Models.Lesson", null)
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.Lesson", "Lesson")
+                        .WithMany("Visits")
+                        .HasForeignKey("LessonId1");
+
+                    b.HasOne("AcademyCRM.Core.Models.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademyCRM.Core.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId1");
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -679,8 +1061,37 @@ namespace AcademyCRM.DAL.EF.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.StudentGroup", b =>
+            modelBuilder.Entity("AcademyCRM.Core.Models.Course", b =>
                 {
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseProgram", b =>
+                {
+                    b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.CourseTopic", b =>
+                {
+                    b.Navigation("Materials");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Lesson", b =>
+                {
+                    b.Navigation("Visits");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.Schedule", b =>
+                {
+                    b.Navigation("WeeklyLessons");
+                });
+
+            modelBuilder.Entity("AcademyCRM.Core.Models.StudentGroup", b =>
+                {
+                    b.Navigation("Lessons");
+
+                    b.Navigation("Schedule");
+
                     b.Navigation("Students");
                 });
 #pragma warning restore 612, 618

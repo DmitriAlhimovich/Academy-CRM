@@ -2,7 +2,7 @@
 
 namespace AcademyCRM.Core.Models
 {
-    public class Topic :IIdProperty
+    public class CourseCategory :IIdProperty
     {
         public int Id { get; set; }
 
@@ -10,6 +10,6 @@ namespace AcademyCRM.Core.Models
         public string Description { get; set; }
 
         public int? ParentId { get; set; }
-        public Topic Parent { get; set; }
+        public CourseCategory Parent { get; set; }
     }
 }

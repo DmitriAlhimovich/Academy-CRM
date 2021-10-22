@@ -19,7 +19,7 @@ namespace AcademyCRM.MVC.Controllers
     public class CoursesController : Controller
     {
         private readonly ICourseService _courseService;
-        private readonly IEntityService<Topic> _topicService;
+        private readonly IEntityService<CourseCategory> _topicService;
         private readonly IStudentRequestService _requestService;
         private readonly IConfiguration _configuration;
         private readonly SecurityOptions _securityOptions;
@@ -27,7 +27,7 @@ namespace AcademyCRM.MVC.Controllers
 
         public CoursesController(ICourseService courseService,
             IMapper mapper,
-            IEntityService<Topic> topicService,
+            IEntityService<CourseCategory> topicService,
             IStudentRequestService requestService,
             IConfiguration configuration,
             IOptions<SecurityOptions> options

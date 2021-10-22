@@ -272,7 +272,7 @@ namespace AcademyCRM.DAL.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Topic", b =>
+            modelBuilder.Entity("AcademyCRM.BLL.Models.CourseCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -509,13 +509,13 @@ namespace AcademyCRM.DAL.EF.Migrations
 
             modelBuilder.Entity("AcademyCRM.BLL.Models.Course", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.Topic", "Topic")
+                    b.HasOne("AcademyCRM.BLL.Models.CourseCategory", "CourseCategory")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Topic");
+                    b.Navigation("CourseCategory");
                 });
 
             modelBuilder.Entity("AcademyCRM.BLL.Models.Student", b =>
@@ -555,9 +555,9 @@ namespace AcademyCRM.DAL.EF.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("AcademyCRM.BLL.Models.Topic", b =>
+            modelBuilder.Entity("AcademyCRM.BLL.Models.CourseCategory", b =>
                 {
-                    b.HasOne("AcademyCRM.BLL.Models.Topic", "Parent")
+                    b.HasOne("AcademyCRM.BLL.Models.CourseCategory", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId");
 
