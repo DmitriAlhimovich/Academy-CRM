@@ -25,15 +25,9 @@ namespace AcademyCRM.DAL.EF.Tests
         [Test]
         public void Group_Schedule_DeleteCascade()
         {
-            //var category = new CourseCategory() {Title = ".net"};
-            //context.CourseCategories.Add(category);
-            //context.SaveChanges();
-
             var course = new Course() { Title = "testCourse" };
             _context.Courses.Add(course);
             _context.SaveChanges();
-
-
 
             var group = new StudentGroup() { Title = "testGroup", CourseId = course.Id, };
             _context.StudentGroups.Add(group);
