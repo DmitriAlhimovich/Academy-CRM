@@ -48,7 +48,7 @@ namespace AcademyCRM.MVC
                  .AddEntityFrameworkStores<AcademyContext>()
                  .AddDefaultTokenProviders();
 
-            services.AddScoped<IRepository<Topic>, BaseRepository<Topic>>();
+            services.AddScoped<IRepository<CourseCategory>, BaseRepository<CourseCategory>>();
             services.AddScoped<ICourseRepository, CoursesRepository>();
             services.AddScoped<IRepository<Teacher>, TeachersRepository>();
 

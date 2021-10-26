@@ -2,7 +2,7 @@
 
 namespace AcademyCRM.BLL.Services
 {
-    public interface ITopicService : IEntityService<Topic>
+    public interface ITopicService : IEntityService<CourseCategory>
     {
     }
 }

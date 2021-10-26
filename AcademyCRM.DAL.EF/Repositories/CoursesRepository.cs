@@ -30,10 +30,6 @@ namespace AcademyCRM.DAL.EF.Repositories
                 filteredCourses = filteredCourses.Where(c =>
                 c.Description.Contains(filter.DescriptionContains));
 
-            if (!string.IsNullOrWhiteSpace(filter.ProgramContains))
-                filteredCourses = filteredCourses.Where(c =>
-                c.Program.Contains(filter.ProgramContains));
-
             if (filter.PriceFrom.HasValue)
                 filteredCourses = filteredCourses.Where(c => c.Price >= filter.PriceFrom.Value);
 
@@ -76,7 +72,7 @@ namespace AcademyCRM.DAL.EF.Repositories
         public override IEnumerable<Course> GetAll()
         {
             return _context.Courses
-                .Include(c => c.Topic)
+                .Include(c => c.Categories)
                 .ToList();
         }
     }
