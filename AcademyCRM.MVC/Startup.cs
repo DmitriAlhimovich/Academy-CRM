@@ -35,9 +35,17 @@ namespace AcademyCRM.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<AcademyContext>(options =>
+            //    {
+            //        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //        options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
+            //        options.EnableSensitiveDataLogging();
+            //    }
+            //);
+
             services.AddDbContext<AcademyContext>(options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                    options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection"));
                     options.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); }));
                     options.EnableSensitiveDataLogging();
                 }
